@@ -9,6 +9,7 @@ Foreman API. It provides handlers to the following endpoints:
 - pickaxe
 - ping
 - site-map
+- tags
 
 ## Endpoints
 
@@ -56,6 +57,12 @@ provided credentials against the provided client.
 `/api/site-map`
 
 API endpoint that can be used to manipulate a Site Map configuration.
+
+### tags
+
+`/api/tags`
+
+API endpoint that can be used to create new tags and apply them to miners.
 
 ## Requirements
 

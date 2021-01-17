@@ -6,6 +6,7 @@ import mn.foreman.api.endpoints.notifications.Notifications;
 import mn.foreman.api.endpoints.pickaxe.Pickaxe;
 import mn.foreman.api.endpoints.ping.Ping;
 import mn.foreman.api.endpoints.sitemap.SiteMap;
+import mn.foreman.api.endpoints.tags.Tags;
 
 /**
  * A {@link ForemanApi} provides a mechanism for interacting with the Foreman
@@ -60,4 +61,12 @@ public interface ForemanApi {
      * @return The API handler.
      */
     SiteMap siteMap();
+
+    /**
+     * Creates a new {@link Tags} that can be leveraged to operate on the
+     * <code>/api/tags</code> Foreman API endpoint.
+     *
+     * @return The API handlers.
+     */
+    Tags tags();
 }

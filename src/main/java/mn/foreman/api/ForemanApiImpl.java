@@ -12,6 +12,8 @@ import mn.foreman.api.endpoints.ping.Ping;
 import mn.foreman.api.endpoints.ping.PingImpl;
 import mn.foreman.api.endpoints.sitemap.SiteMap;
 import mn.foreman.api.endpoints.sitemap.SiteMapImpl;
+import mn.foreman.api.endpoints.tags.Tags;
+import mn.foreman.api.endpoints.tags.TagsImpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -92,6 +94,13 @@ public class ForemanApiImpl
     @Override
     public SiteMap siteMap() {
         return new SiteMapImpl(
+                this.objectMapper,
+                this.webUtil);
+    }
+
+    @Override
+    public Tags tags() {
+        return new TagsImpl(
                 this.objectMapper,
                 this.webUtil);
     }
