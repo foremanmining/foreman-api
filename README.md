@@ -16,8 +16,8 @@ Foreman API. It provides handlers to the following endpoints:
 
 `/api/actions`
 
-API endpoint that can be leveraged to run actions against miners. The following
-actions are supported by this library:
+API endpoint that can be leveraged to run actions against miners and check the
+action statuses. The following actions are supported by this library:
 
 - change-pools: apply a pool change to the provided ASICs
 - network: apply a network config to the provided ASICs
