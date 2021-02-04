@@ -53,6 +53,10 @@ public interface Miners {
     @JsonIgnoreProperties(ignoreUnknown = true)
     class Miner {
 
+        /** Whether or not the miner is active. */
+        @JsonProperty("active")
+        public boolean active;
+
         /** The API ip. */
         @JsonProperty("apiIp")
         public String apiIp;
@@ -80,6 +84,14 @@ public interface Miners {
         /** The platform. */
         @JsonProperty("platform")
         public String platform;
+
+        /** Whether or not the miner has been seen. */
+        @JsonProperty("seen")
+        public boolean seen;
+
+        /** The miner status. */
+        @JsonProperty("status")
+        public String status;
 
         /** The miner type. */
         @JsonProperty("minerType")

@@ -6,6 +6,10 @@ import mn.foreman.api.model.CommandStart;
 import mn.foreman.api.model.CommandUpdate;
 import mn.foreman.api.model.Commands;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -14,6 +18,13 @@ import java.util.Optional;
  * <code>/api/pickaxe</code> Foreman API endpoint.
  */
 public interface Pickaxe {
+
+    /**
+     * Returns all of the pickaxes.
+     *
+     * @return All of the pickaxes.
+     */
+    List<PickaxeInstance> all();
 
     /**
      * Sends a command completion to the Foreman API.
@@ -64,4 +75,25 @@ public interface Pickaxe {
      * @return Whether or not the command was successful.
      */
     boolean updateMacs(Map<Miners.Miner, String> newMacs);
+
+    /** A pickaxe instance. */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    class PickaxeInstance {
+
+        /** The id. */
+        @JsonProperty("id")
+        public int id;
+
+        /** The key. */
+        @JsonProperty("key")
+        public String key;
+
+        /** The label. */
+        @JsonProperty("label")
+        public String label;
+
+        /** The version. */
+        @JsonProperty("version")
+        public String version;
+    }
 }

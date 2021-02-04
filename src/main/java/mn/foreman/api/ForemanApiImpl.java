@@ -79,6 +79,7 @@ public class ForemanApiImpl
     @Override
     public Pickaxe pickaxe() {
         return new PickaxeImpl(
+                this.clientId,
                 this.pickaxeId,
                 this.objectMapper,
                 this.webUtil);

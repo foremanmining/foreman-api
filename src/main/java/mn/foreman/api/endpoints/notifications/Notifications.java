@@ -13,6 +13,18 @@ import java.util.List;
 public interface Notifications {
 
     /**
+     * Obtains the Discord notifications.
+     *
+     * @param sinceId        The previously observed id (-1 to disable).
+     * @param sinceTimestamp The cutoff date (null to disable).
+     *
+     * @return The Discord notifications.
+     */
+    List<Notification> discord(
+            int sinceId,
+            Instant sinceTimestamp);
+
+    /**
      * Obtains the Telegram notifications.
      *
      * @param sinceId        The previously observed id (-1 to disable).

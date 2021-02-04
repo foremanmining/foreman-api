@@ -13,6 +13,7 @@ import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -26,6 +27,9 @@ public class PickaxeImpl
     private static final Logger LOG =
             LoggerFactory.getLogger(PickaxeImpl.class);
 
+    /** The client ID. */
+    private final String clientId;
+
     /** The json mapper. */
     private final ObjectMapper objectMapper;
 
@@ -38,17 +42,35 @@ public class PickaxeImpl
     /**
      * Constructor.
      *
+     * @param clientId     The client ID.
      * @param pickaxeId    The pickaxe ID.
      * @param objectMapper The mapper.
      * @param webUtil      The web utilities.
      */
     public PickaxeImpl(
+            final String clientId,
             final String pickaxeId,
             final ObjectMapper objectMapper,
             final WebUtil webUtil) {
+        this.clientId = clientId;
         this.pickaxeId = pickaxeId;
         this.objectMapper = objectMapper;
         this.webUtil = webUtil;
+    }
+
+    @Override
+    public List<PickaxeInstance> all() {
+        return this.webUtil.get(
+                String.format(
+                        "/api/pickaxe/%s",
+                        this.clientId))
+                .flatMap(
+                        s -> JsonUtils.fromJson(
+                                s,
+                                this.objectMapper,
+                                new TypeReference<List<PickaxeInstance>>() {
+                                }))
+                .orElse(Collections.emptyList());
     }
 
     @Override

@@ -42,9 +42,38 @@ public class NotificationsImpl
     }
 
     @Override
+    public List<Notification> discord(
+            final int sinceId,
+            final Instant sinceTimestamp) {
+        return getNotifications(
+                sinceId,
+                sinceTimestamp,
+                "discord");
+    }
+
+    @Override
     public List<Notification> telegram(
             final int sinceId,
             final Instant sinceTimestamp) {
+        return getNotifications(
+                sinceId,
+                sinceTimestamp,
+                "telegram");
+    }
+
+    /**
+     * Gets the notifications.
+     *
+     * @param sinceId        The cutoff ID.
+     * @param sinceTimestamp The cutoff timestamp.
+     * @param destination    The notification destination.
+     *
+     * @return The notifications.
+     */
+    private List<Notification> getNotifications(
+            final int sinceId,
+            final Instant sinceTimestamp,
+            final String destination) {
         final Map<String, String> params = new HashMap<>();
         if (sinceId >= 0) {
             params.put(
@@ -58,7 +87,8 @@ public class NotificationsImpl
         }
         return this.webUtil.get(
                 String.format(
-                        "/api/notifications/telegram/%s",
+                        "/api/notifications/%s/%s",
+                        destination,
                         this.clientId),
                 params)
                 .flatMap(
