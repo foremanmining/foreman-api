@@ -2,6 +2,8 @@ package mn.foreman.api;
 
 import mn.foreman.api.endpoints.actions.Actions;
 import mn.foreman.api.endpoints.actions.ActionsImpl;
+import mn.foreman.api.endpoints.groups.Groups;
+import mn.foreman.api.endpoints.groups.GroupsImpl;
 import mn.foreman.api.endpoints.miners.Miners;
 import mn.foreman.api.endpoints.miners.MinersImpl;
 import mn.foreman.api.endpoints.notifications.Notifications;
@@ -55,6 +57,14 @@ public class ForemanApiImpl
     @Override
     public Actions actions() {
         return new ActionsImpl(
+                this.objectMapper,
+                this.webUtil);
+    }
+
+    @Override
+    public Groups groups() {
+        return new GroupsImpl(
+                this.clientId,
                 this.objectMapper,
                 this.webUtil);
     }

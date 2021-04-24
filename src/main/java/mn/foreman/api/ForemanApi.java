@@ -1,6 +1,7 @@
 package mn.foreman.api;
 
 import mn.foreman.api.endpoints.actions.Actions;
+import mn.foreman.api.endpoints.groups.Groups;
 import mn.foreman.api.endpoints.miners.Miners;
 import mn.foreman.api.endpoints.notifications.Notifications;
 import mn.foreman.api.endpoints.pickaxe.Pickaxe;
@@ -21,6 +22,14 @@ public interface ForemanApi {
      * @return The API handler.
      */
     Actions actions();
+
+    /**
+     * Creates a new {@link Actions} that can be leveraged to operate on the
+     * <code>/api/groups</code> Foreman API endpoint.
+     *
+     * @return The API handler.
+     */
+    Groups groups();
 
     /**
      * Creates a new {@link Miners} that can be leveraged to operate on the
