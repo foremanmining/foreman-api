@@ -61,6 +61,13 @@ public interface Pickaxe {
             String commandId);
 
     /**
+     * Obtains the configuration.
+     *
+     * @return The configuration.
+     */
+    Optional<PickaxeConfiguration> config();
+
+    /**
      * Queries for pending commands to be executed.
      *
      * @return The commands to execute, if any.
@@ -75,6 +82,19 @@ public interface Pickaxe {
      * @return Whether or not the command was successful.
      */
     boolean updateMacs(Map<Miners.Miner, String> newMacs);
+
+    /** The pickaxe configuration. */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    class PickaxeConfiguration {
+
+        /** The socket timeout. */
+        @JsonProperty("socketTimeout")
+        public int socketTimeout;
+
+        /** The socket timeout (units). */
+        @JsonProperty("socketTimeoutUnits")
+        public String socketTimeoutUnits;
+    }
 
     /** A pickaxe instance. */
     @JsonIgnoreProperties(ignoreUnknown = true)

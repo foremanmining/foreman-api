@@ -147,6 +147,23 @@ public class PickaxeImpl
     }
 
     @Override
+    public Optional<PickaxeConfiguration> config() {
+        final Optional<String> response =
+                this.webUtil.get(
+                        String.format(
+                                "/api/pickaxe/%s/appConfig",
+                                this.pickaxeId));
+        if (response.isPresent()) {
+            return JsonUtils.fromJson(
+                    response.get(),
+                    this.objectMapper,
+                    new TypeReference<PickaxeConfiguration>() {
+                    });
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<Commands> getCommands() {
         final Optional<String> response =
                 this.webUtil.get(

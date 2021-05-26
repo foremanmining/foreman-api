@@ -35,7 +35,7 @@ public interface Groups {
 
         /** An object representing a sub-client. */
         @JsonIgnoreProperties(ignoreUnknown = true)
-        static class SubClient {
+        public static class SubClient {
 
             /** The client name. */
             @JsonProperty("clientName")
