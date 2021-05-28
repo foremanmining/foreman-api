@@ -87,13 +87,21 @@ public interface Pickaxe {
     @JsonIgnoreProperties(ignoreUnknown = true)
     class PickaxeConfiguration {
 
-        /** The socket timeout. */
-        @JsonProperty("socketTimeout")
-        public int socketTimeout;
+        /** The read socket timeout. */
+        @JsonProperty("readSocketTimeout")
+        public int readSocketTimeout;
 
-        /** The socket timeout (units). */
-        @JsonProperty("socketTimeoutUnits")
-        public String socketTimeoutUnits;
+        /** The read socket timeout (units). */
+        @JsonProperty("readSocketTimeoutUnits")
+        public String readSocketTimeoutUnits;
+
+        /** The write socket timeout. */
+        @JsonProperty("writeSocketTimeout")
+        public int writeSocketTimeout;
+
+        /** The write socket timeout (units). */
+        @JsonProperty("writeSocketTimeoutUnits")
+        public String writeSocketTimeoutUnits;
     }
 
     /** A pickaxe instance. */
