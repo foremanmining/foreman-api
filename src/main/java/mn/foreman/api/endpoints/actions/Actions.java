@@ -41,6 +41,18 @@ public interface Actions {
             List<Pool> pools);
 
     /**
+     * Changes the power mode for the provided miner.
+     *
+     * @param minerId The miner ID.
+     * @param mode    The power mode.
+     *
+     * @return The response, if present.
+     */
+    Optional<Response> changePowerMode(
+            int minerId,
+            PowerMode mode);
+
+    /**
      * Gets the status of the provided command.
      *
      * @param command The command.
@@ -49,6 +61,22 @@ public interface Actions {
      */
     Optional<StatusRunning> status(
             int command);
+
+    /** All of the known power modes. */
+    enum PowerMode {
+
+        /** Sleeping. */
+        SLEEPING,
+
+        /** Low power mode. */
+        LOW,
+
+        /** Normal power mode. */
+        NORMAL,
+
+        /** High power mode. */
+        HIGH;
+    }
 
     /** An action response. */
     @JsonIgnoreProperties(ignoreUnknown = true)

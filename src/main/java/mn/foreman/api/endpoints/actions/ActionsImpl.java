@@ -76,6 +76,18 @@ public class ActionsImpl
     }
 
     @Override
+    public Optional<Response> changePowerMode(
+            final int minerId,
+            final PowerMode mode) {
+        return runAction(
+                minerId,
+                "power-mode",
+                ImmutableMap.of(
+                        "powerMode",
+                        mode.name().toLowerCase()));
+    }
+
+    @Override
     public Optional<StatusRunning> status(final int command) {
         Optional<StatusRunning> result = Optional.empty();
         final Optional<String> response =
