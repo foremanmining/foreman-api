@@ -38,27 +38,31 @@ public class JdkWebUtil
     /** No request content. */
     private static final String NO_CONTENT = "";
 
-    /** How long to wait on socket operations before disconnecting. */
-    private static final int SOCKET_TIMEOUT =
-            (int) TimeUnit.SECONDS.toMillis(60);
-
     /** The API token. */
     private final String apiToken;
 
     /** The configuration. */
     private final String foremanUrl;
 
+    /** The socket timeout. */
+    private final int socketTimeoutMillis;
+
     /**
      * Constructor.
      *
-     * @param foremanUrl The Foreman API url.
-     * @param apiToken   The API token.
+     * @param foremanUrl         The Foreman API url.
+     * @param apiToken           The API token.
+     * @param socketTimeout      The socket timeout.
+     * @param socketTimeoutUnits The socket timeout (units).
      */
     public JdkWebUtil(
             final String foremanUrl,
-            final String apiToken) {
+            final String apiToken,
+            final int socketTimeout,
+            final TimeUnit socketTimeoutUnits) {
         this.foremanUrl = foremanUrl;
         this.apiToken = apiToken;
+        this.socketTimeoutMillis = (int) socketTimeoutUnits.toMillis(socketTimeout);
     }
 
     @Override
@@ -189,8 +193,8 @@ public class JdkWebUtil
                         "Authorization",
                         "Token " + this.apiToken);
             }
-            connection.setConnectTimeout(SOCKET_TIMEOUT);
-            connection.setReadTimeout(SOCKET_TIMEOUT);
+            connection.setConnectTimeout(this.socketTimeoutMillis);
+            connection.setReadTimeout(this.socketTimeoutMillis);
 
             final int code = connection.getResponseCode();
             if (code == HttpURLConnection.HTTP_OK) {
@@ -230,9 +234,9 @@ public class JdkWebUtil
 
         final RequestConfig requestConfig =
                 RequestConfig.custom()
-                        .setConnectTimeout(SOCKET_TIMEOUT)
-                        .setConnectionRequestTimeout(SOCKET_TIMEOUT)
-                        .setSocketTimeout(SOCKET_TIMEOUT)
+                        .setConnectTimeout(this.socketTimeoutMillis)
+                        .setConnectionRequestTimeout(this.socketTimeoutMillis)
+                        .setSocketTimeout(this.socketTimeoutMillis)
                         .build();
 
         try (final CloseableHttpClient httpClient =

@@ -1,10 +1,7 @@
 package mn.foreman.api.endpoints.pickaxe;
 
 import mn.foreman.api.endpoints.miners.Miners;
-import mn.foreman.api.model.CommandDone;
-import mn.foreman.api.model.CommandStart;
-import mn.foreman.api.model.CommandUpdate;
-import mn.foreman.api.model.Commands;
+import mn.foreman.api.model.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -39,6 +36,16 @@ public interface Pickaxe {
             String commandId);
 
     /**
+     * Sends command completions to the Foreman API.
+     *
+     * @param done The completed commands.
+     *
+     * @return The command response.
+     */
+    Optional<CommandDoneBatch.Response> commandDoneBatch(
+            CommandDoneBatch done);
+
+    /**
      * Sends a command started to the Foreman API.
      *
      * @param start The started command.
@@ -47,6 +54,16 @@ public interface Pickaxe {
      */
     Optional<CommandStart.Response> commandStarted(
             CommandStart start);
+
+    /**
+     * Sends command starts to the Foreman API.
+     *
+     * @param start The started commands.
+     *
+     * @return The command response.
+     */
+    Optional<CommandStartBatch.Response> commandStartedBatch(
+            CommandStartBatch start);
 
     /**
      * Sends a command update to the Foreman API.
@@ -59,6 +76,16 @@ public interface Pickaxe {
     Optional<CommandUpdate.Response> commandUpdate(
             CommandUpdate update,
             String commandId);
+
+    /**
+     * Sends command updates to the Foreman API.
+     *
+     * @param update The updates.
+     *
+     * @return The command response.
+     */
+    Optional<CommandUpdateBatch.Response> commandUpdateBatch(
+            CommandUpdateBatch update);
 
     /**
      * Obtains the configuration.
@@ -86,6 +113,10 @@ public interface Pickaxe {
     /** The pickaxe configuration. */
     @JsonIgnoreProperties(ignoreUnknown = true)
     class PickaxeConfiguration {
+
+        /** The command completion batch size. */
+        @JsonProperty("commandCompletionBatchSize")
+        public int commandCompletionBatchSize;
 
         /** The read socket timeout. */
         @JsonProperty("readSocketTimeout")

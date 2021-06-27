@@ -77,73 +77,59 @@ public class PickaxeImpl
     public Optional<CommandDone.Response> commandDone(
             final CommandDone done,
             final String commandId) {
-        Optional<CommandDone.Response> result = Optional.empty();
-        try {
-            final Optional<String> response =
-                    this.webUtil.post(
-                            String.format(
-                                    "/api/pickaxe/%s/command/%s/done",
-                                    this.pickaxeId,
-                                    commandId),
-                            this.objectMapper.writeValueAsString(done));
-            if (response.isPresent()) {
-                result =
-                        JsonUtils.fromJson(
-                                response.get(),
-                                this.objectMapper,
-                                new TypeReference<CommandDone.Response>() {
-                                });
-            }
-        } catch (final JsonProcessingException e) {
-            LOG.warn("Exception occurred while parsing json", e);
-        }
-        return result;
+        return runStandardCommand(
+                done,
+                String.format(
+                        "/api/pickaxe/%s/command/%s/done",
+                        this.pickaxeId,
+                        commandId));
+    }
+
+    @Override
+    public Optional<CommandDoneBatch.Response> commandDoneBatch(
+            final CommandDoneBatch done) {
+        return runStandardCommand(
+                done,
+                "/api/pickaxe/%s/command/done");
     }
 
     @Override
     public Optional<CommandStart.Response> commandStarted(
             final CommandStart start) {
-        final Optional<String> response =
-                this.webUtil.post(
-                        String.format(
-                                "/api/pickaxe/%s/command/%s/start",
-                                this.pickaxeId,
-                                start.id));
-        if (response.isPresent()) {
-            return JsonUtils.fromJson(
-                    response.get(),
-                    this.objectMapper,
-                    new TypeReference<CommandStart.Response>() {
-                    });
-        }
-        return Optional.empty();
+        return runStandardCommand(
+                start,
+                String.format(
+                        "/api/pickaxe/%s/command/%s/start",
+                        this.pickaxeId,
+                        start.id));
+    }
+
+    @Override
+    public Optional<CommandStartBatch.Response> commandStartedBatch(
+            final CommandStartBatch start) {
+        return runStandardCommand(
+                start,
+                "/api/pickaxe/%s/command/start");
     }
 
     @Override
     public Optional<CommandUpdate.Response> commandUpdate(
             final CommandUpdate update,
             final String commandId) {
-        Optional<CommandUpdate.Response> result = Optional.empty();
-        try {
-            final Optional<String> response =
-                    this.webUtil.post(
-                            String.format(
-                                    "/api/pickaxe/%s/command/%s/update",
-                                    this.pickaxeId,
-                                    commandId),
-                            this.objectMapper.writeValueAsString(update));
-            if (response.isPresent()) {
-                result =
-                        JsonUtils.fromJson(
-                                response.get(),
-                                this.objectMapper,
-                                new TypeReference<CommandUpdate.Response>() {
-                                });
-            }
-        } catch (final JsonProcessingException e) {
-            LOG.warn("Exception occurred while parsing json", e);
-        }
-        return result;
+        return runStandardCommand(
+                update,
+                String.format(
+                        "/api/pickaxe/%s/command/%s/update",
+                        this.pickaxeId,
+                        commandId));
+    }
+
+    @Override
+    public Optional<CommandUpdateBatch.Response> commandUpdateBatch(
+            final CommandUpdateBatch update) {
+        return runStandardCommand(
+                update,
+                "/api/pickaxe/%s/command/update");
     }
 
     @Override
@@ -224,5 +210,30 @@ public class PickaxeImpl
             updated = true;
         }
         return updated;
+    }
+
+    private <T, R> Optional<R> runStandardCommand(
+            final T command,
+            final String uri) {
+        Optional<R> result = Optional.empty();
+        try {
+            final Optional<String> response =
+                    this.webUtil.post(
+                            String.format(
+                                    uri,
+                                    this.pickaxeId),
+                            this.objectMapper.writeValueAsString(command));
+            if (response.isPresent()) {
+                result =
+                        JsonUtils.fromJson(
+                                response.get(),
+                                this.objectMapper,
+                                new TypeReference<R>() {
+                                });
+            }
+        } catch (final JsonProcessingException e) {
+            LOG.warn("Exception occurred while parsing json", e);
+        }
+        return result;
     }
 }

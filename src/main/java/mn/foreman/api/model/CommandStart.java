@@ -11,7 +11,8 @@ import java.util.Map;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CommandStart {
+public class CommandStart
+        implements Command {
 
     /** The arguments for the command. */
     @JsonProperty("args")

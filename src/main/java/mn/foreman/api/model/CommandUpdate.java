@@ -14,7 +14,8 @@ import java.util.Map;
  */
 @Data
 @Builder
-public class CommandUpdate {
+public class CommandUpdate
+        implements Command {
 
     /** The command. */
     @JsonProperty("command")
