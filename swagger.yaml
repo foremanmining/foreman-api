@@ -1,0 +1,492 @@
+openapi: 3.0.2
+info:
+  title: Foreman API
+  description: "The following documentation captures the majority of the user-facing endpoints exposed via the Foreman API. Token-based authentication is required and the necessary Client ID and API Key can be obtained from your dashboard [here](https://dashboard.foreman.mn/dashboard/profile/).\n\nA Java library for interacting with Foreman can be found [here](https://github.com/delawr0190/foreman-api)."
+  version: "1.0.0"
+  contact:
+    email: contact@obm.mn
+servers:
+  - url: https://api.foreman.mn/api
+security:
+  - apiKey: []
+tags:
+  - name: miners
+    description: Obtains miner-related information.
+  - name: ping
+    description: Test endpoint for validating connectivity and authentication tokens.
+  - name: actions
+    description: Run actions against miners.
+paths:
+  /miners/{clientId}/{pickaxeId}:
+    get:
+      summary: Return miner-related information.
+      tags:
+        - miners
+      description: Returns information related to every miner on the provided client and pickaxe instance.
+      parameters:
+       - in: path
+         name: clientId
+         required: true
+         schema:
+          type: integer
+          minimum: 1
+         description: The client ID.
+       - in: path
+         name: pickaxeId
+         required: true
+         schema:
+          type: string
+          format: uuid
+         description: The pickaxe ID.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/miners'
+  /ping:
+    get:
+      summary: Verifies connectivity to Foreman. Not authenticated.
+      security: []
+      tags:
+        - ping
+      description: Verifies that the Foreman API is responsive.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ping'
+  /ping/{clientId}:
+    get:
+      summary: Verifies connectivity to Foreman. Authenticated.
+      tags:
+        - ping
+      description: Verifies that the Foreman API is responsive and that the provided crendentials are correct.
+      parameters:
+       - in: path
+         name: clientId
+         required: true
+         schema:
+          type: integer
+          minimum: 1
+         description: The client ID.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ping'
+        401:
+          description: No credentials provided.
+        403:
+          description: User doesn't have access to this client.
+  /actions/status/{commandId}:
+    get:
+      summary: Obtains the status of a command.
+      tags:
+        - actions
+      parameters:
+       - in: path
+         name: commandId
+         required: true
+         schema:
+          type: integer
+          minimum: 1
+         description: The Foreman Client ID.
+      description:
+       Obtains the status of an existing Foreman command. Commands can be in progress or completed.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commandStatus'
+        403:
+          description: User doesn't have access to this miner.
+        404:
+          description: Miner doesn't exist.
+  /actions/reboot/{minerId}:
+    post:
+      summary: Reboots the miner.
+      tags:
+        - actions
+      parameters:
+       - in: path
+         name: minerId
+         required: true
+         schema:
+          type: integer
+          minimum: 1
+         description: The miner ID.
+      description:
+       Changes the miner. Currently only ASIC support.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commandAccepted'
+        400:
+          description: Request was malformed.
+        401:
+          description: No credentials provided.
+        403:
+          description: User doesn't have access to this miner or isn't allowed to run this command.
+        404:
+          description: Miner doesn't exist.
+  /actions/change-pools/{minerId}:
+    post:
+      summary: Changes mining pools.
+      tags:
+        - actions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pools'
+      parameters:
+        - in: path
+          name: minerId
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The miner ID.
+      description:
+       Changes the pools of a miner. Currently only ASIC support.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commandAccepted'
+        401:
+          description: No credentials provided.
+        403:
+          description: User doesn't have access to this miner or isn't allowed to run this command.
+        404:
+          description: Miner not found or bad request.
+  /actions/network/{minerId}:
+    post:
+      summary: Apply a static IP configuration.
+      tags:
+        - actions
+      parameters:
+       - in: path
+         name: minerId
+         required: true
+         schema:
+          type: integer
+          minimum: 1
+         description: The miner ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/network'
+      description:
+       Changes the network configuration of a miner. Currently only ASIC support.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commandAccepted'
+        403:
+          description: User doesn't have access to this miner or isn't allowed to run this command.
+        404:
+          description: Miner not found or bad request.
+        409:
+          description: Miner already exists using this IP.
+  /actions/power-mode/{minerId}:
+    post:
+      summary: Change the power mode.
+      tags:
+        - actions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/powerMode'
+      parameters:
+       - in: path
+         name: minerId
+         required: true
+         schema:
+          type: integer
+          minimum: 1
+         description: The miner ID.
+      description:
+       Changes the power mode of a miner. Currently only ASIC support.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commandAccepted'
+        400:
+          description: Request was malformed.
+        401:
+          description: No credentials provided.
+        403:
+          description: User doesn't have access to this miner or isn't allowed to run this command.
+        404:
+          description: Miner doesn't exist.
+  /actions/change-password/{minerId}:
+    post:
+      summary: Change the miner password.
+      tags:
+        - actions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/passwords'
+      parameters:
+       - in: path
+         name: minerId
+         required: true
+         schema:
+          type: integer
+          minimum: 1
+         description: The miner ID.
+      description:
+       Changes the password of a miner. Currently only ASIC support.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commandAccepted'
+        400:
+          description: Request was malformed.
+        401:
+          description: No credentials provided.
+        403:
+          description: User doesn't have access to this miner or isn't allowed to run this command.
+        404:
+          description: Miner doesn't exist.
+  /actions/blink/{minerId}:
+    post:
+      summary: Blink the miner's LEDs.
+      tags:
+        - actions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/blink'
+      parameters:
+       - in: path
+         name: minerId
+         required: true
+         schema:
+          type: integer
+          minimum: 1
+         description: The miner ID.
+      description:
+       Blinks the LEDs on a miner. Currently only ASIC support.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commandAccepted'
+        400:
+          description: Request was malformed.
+        401:
+          description: No credentials provided.
+        403:
+          description: User doesn't have access to this miner or isn't allowed to run this command.
+        404:
+          description: Miner doesn't exist.
+components:
+  securitySchemes:
+    apiKey:
+      description: "Used to authentication requests to Foreman. Authorization header value must be 'Token <api_key_here>'"
+      type: apiKey
+      in: header
+      name: Authorization
+  schemas:
+    ping:
+      type: object
+      properties:
+        ping:
+          type: string
+          enum: ["pong"]
+          example: pong
+    commandStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: ["pending", "in-progress", "success", "failed"]
+          description: The command status.
+          example: in-progress
+    commandAccepted:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Always "okay".
+          example: okay
+        command:
+          type: string
+          description: The ID that represents the running command.
+          example: 6b3615b4-b499-4566-84f1-eccf6f58edf0
+    powerMode:
+      type: object
+      properties:
+        powerMode:
+          type: string
+          enum: [sleeping, normal]
+    blink:
+      type: object
+      properties:
+        blinkDurationInSeconds:
+          type: integer
+          minimum: 1
+          maximum: 1200
+          example: 60
+    passwords:
+      type: object
+      properties:
+        oldPassword:
+          type: string
+          example: root
+        newPassword:
+          type: string
+          example: notroot
+    network:
+      type: object
+      required:
+        - ipAddress
+        - netmask
+        - gateway
+        - dns
+      properties:
+        ipAddress:
+          type: string
+          example: 192.168.1.5
+        netmask:
+          type: string
+          example: 255.255.255.0
+        gateway:
+          type: string
+          example: 192.168.1.1
+        dns:
+          type: string
+          example: 192.168.1.1
+        hostname:
+          type: string
+          example: antminer
+    pools:
+      type: object
+      required:
+        - pools
+      properties:
+        pools:
+          type: array
+          items:
+            $ref: '#/components/schemas/pool'
+    pool:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The stratum URL.
+          example: stratum+tcp://btc-na.f2pool.com:3333
+        user:
+          type: string
+          description: The stratum workername.
+          example: foreman.worker1
+        pass:
+          type: string
+          description: The stratum password.
+          example: x
+    miners:
+      type: array
+      items:
+        $ref: '#/components/schemas/miner'
+    miner:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The miner ID.
+          example: 123987
+        name:
+          type: string
+          description: The miner name.
+          example: Antminer S19 - 192.168.1.1
+        platform:
+          type: string
+          enum: ["ASIC", "ethOS", "HiveOS", "Linux", "nvOC", "Windows"]
+          description: The miner platform.
+          example: ASIC
+        minerType:
+          type: string
+          description: The miner type.
+          example: Antminer S19
+        apiIp:
+          type: string
+          description: The API ip.
+          example: 192.168.1.1
+        apiPort:
+          type: integer
+          description: The API port.
+          example: 4028
+        seen:
+          type: boolean
+          description: Whether or not the miner has been observed.
+        status:
+          type: string
+          enum: ["pending", "okay", "warn", "fail", "disabled"]
+          description: The current status of the miner.
+        active:
+          type: boolean
+          description: Whether or not the miner is enabled in Foreman.
+        mac:
+          type: string
+          description: The MAC address, if present.
+          example: fe:ed:fa:ce:be:ef
+        serial:
+          type: string
+          description: The miner's serial address, if known.
+          example: SN1792939157851885
+        metrics:
+          type: object
+          description: The last observed metrics.
+          properties:
+            hashRate:
+              type: string
+              description: The last observed hash rate.
+              example: 110000000000000
+            temps:
+              type: array
+              items:
+                type: integer
+              description: The last observed temperatures.
+              example: [35, 67, 52, 80]
+            fans:
+              type: array
+              items:
+                type: integer
+              description: The last observed fan speeds.
+              example: [3500, 3500]
