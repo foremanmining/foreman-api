@@ -118,6 +118,10 @@ public interface Pickaxe {
         @JsonProperty("commandCompletionBatchSize")
         public int commandCompletionBatchSize;
 
+        /** Whether or not metrics should be compressed. */
+        @JsonProperty("compressMetrics")
+        public boolean compressMetrics;
+
         /** The read socket timeout. */
         @JsonProperty("readSocketTimeout")
         public int readSocketTimeout;
