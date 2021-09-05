@@ -4,6 +4,7 @@ import mn.foreman.api.endpoints.miners.Miners;
 import mn.foreman.api.model.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -102,6 +103,20 @@ public interface Pickaxe {
     Optional<Commands> getCommands();
 
     /**
+     * Returns the miner configurations.
+     *
+     * @param version  The version.
+     * @param hostname The hostname.
+     * @param hostIp   The host IP.
+     *
+     * @return The miner configurations.
+     */
+    List<MinerConfig> minerConfigs(
+            String version,
+            String hostname,
+            String hostIp);
+
+    /**
      * Sets the MACs for the provided miners..
      *
      * @param newMacs The new MACs.
@@ -109,6 +124,69 @@ public interface Pickaxe {
      * @return Whether or not the command was successful.
      */
     boolean updateMacs(Map<Miners.Miner, String> newMacs);
+
+    /** A miner configuration. */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    class MinerConfig {
+
+        /** The api ip. */
+        @JsonProperty("apiIp")
+        public String apiIp;
+
+        /** The api port. */
+        @JsonProperty("apiPort")
+        public int apiPort;
+
+        /** The API type. */
+        @JsonProperty("apiType")
+        public ApiType apiType;
+
+        /** The chisel configuration. */
+        @JsonProperty("chisel")
+        public ChiselConfig chisel;
+
+        /** The parameters. */
+        @JsonProperty("params")
+        public List<Param> params;
+
+        /** A chisel configuration. */
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class ChiselConfig {
+
+            /** The port where chisel is listening. */
+            @JsonProperty("apiPort")
+            public int apiPort;
+
+            @Override
+            public String toString() {
+                return String.format("%s [ apiPort=%d ]",
+                        getClass().getSimpleName(),
+                        this.apiPort);
+            }
+        }
+
+        /** A miner configuration parameter. */
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class Param {
+
+            /** The key. */
+            @JsonProperty("key")
+            public String key;
+
+            /** The value. */
+            @JsonProperty("value")
+            public Object value;
+
+            @Override
+            public String toString() {
+                return String.format("%s [ key=%s, value=%s ]",
+                        getClass().getSimpleName(),
+                        this.key,
+                        this.value);
+            }
+        }
+    }
 
     /** The pickaxe configuration. */
     @JsonIgnoreProperties(ignoreUnknown = true)

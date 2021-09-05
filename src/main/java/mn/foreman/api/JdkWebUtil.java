@@ -1,12 +1,9 @@
 package mn.foreman.api;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.*;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -14,13 +11,8 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
@@ -76,7 +68,7 @@ public class JdkWebUtil
     public Optional<String> get(
             final String uri,
             final boolean auth) {
-        return get(
+        return readOp(
                 uri,
                 auth,
                 Collections.emptyMap());
@@ -86,7 +78,7 @@ public class JdkWebUtil
     public Optional<String> get(
             final String uri,
             final Map<String, String> params) {
-        return get(
+        return readOp(
                 uri,
                 true,
                 params);
@@ -132,86 +124,75 @@ public class JdkWebUtil
     }
 
     /**
-     * Generates a parameter string.
-     *
-     * @param params The parameters.
-     *
-     * @return The query params.
-     *
-     * @throws UnsupportedEncodingException on failure.
-     */
-    private static String getParamsString(final Map<String, String> params)
-            throws UnsupportedEncodingException {
-        final StringBuilder result = new StringBuilder();
-
-        for (final Map.Entry<String, String> entry : params.entrySet()) {
-            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-            result.append("&");
-        }
-
-        final String resultString = result.toString();
-        return resultString.length() > 0
-                ? resultString.substring(0, resultString.length() - 1)
-                : resultString;
-    }
-
-    /**
-     * Performs a GET operation, with auth, if necessary.
+     * Runs the provided entity request.
      *
      * @param uri    The URI.
-     * @param auth   Whether or not to auth.
-     * @param params The parameters.
+     * @param auth   Whether or not auth is required.
+     * @param params The params.
      *
-     * @return The response.
+     * @return The response content.
      */
-    private Optional<String> get(
+    private Optional<String> readOp(
             final String uri,
             final boolean auth,
             final Map<String, String> params) {
         String response = null;
-        try {
-            final URL url =
-                    new URL(
+
+        final RequestConfig requestConfig =
+                RequestConfig.custom()
+                        .setConnectTimeout(this.socketTimeoutMillis)
+                        .setConnectionRequestTimeout(this.socketTimeoutMillis)
+                        .setSocketTimeout(this.socketTimeoutMillis)
+                        .build();
+
+        try (final CloseableHttpClient httpClient =
+                     HttpClients.custom()
+                             .setDefaultRequestConfig(requestConfig)
+                             .disableAutomaticRetries()
+                             .build()) {
+
+            final HttpGet httpGet =
+                    new HttpGet(
                             String.format(
-                                    "%s%s%s",
+                                    "%s%s",
                                     this.foremanUrl,
-                                    uri,
-                                    !params.isEmpty()
-                                            ? "?" + getParamsString(params)
-                                            : ""));
+                                    uri));
 
-            LOG.debug("Querying {}{}", this.foremanUrl, uri);
+            final URIBuilder uriBuilder =
+                    new URIBuilder(httpGet.getURI());
+            if (!params.isEmpty()) {
+                params.forEach(uriBuilder::addParameter);
+            }
+            httpGet.setURI(uriBuilder.build());
 
-            final HttpURLConnection connection =
-                    (HttpURLConnection) url.openConnection();
+            LOG.debug("Querying {}{}",
+                    this.foremanUrl,
+                    uri);
 
-            connection.setRequestMethod("GET");
             if (auth) {
-                connection.setRequestProperty(
+                httpGet.setHeader(
                         "Authorization",
                         "Token " + this.apiToken);
             }
-            connection.setConnectTimeout(this.socketTimeoutMillis);
-            connection.setReadTimeout(this.socketTimeoutMillis);
 
-            final int code = connection.getResponseCode();
-            if (code == HttpURLConnection.HTTP_OK) {
-                try (final InputStreamReader inputStreamReader =
-                             new InputStreamReader(
-                                     connection.getInputStream());
-                     final BufferedReader reader =
-                             new BufferedReader(
-                                     inputStreamReader)) {
-                    response = IOUtils.toString(reader);
-                    LOG.debug("Received response: {}", response);
+            try (final CloseableHttpResponse httpResponse =
+                         httpClient.execute(httpGet)) {
+                final int statusCode =
+                        httpResponse
+                                .getStatusLine()
+                                .getStatusCode();
+                if (statusCode == HttpStatus.SC_OK) {
+                    response =
+                            EntityUtils.toString(
+                                    httpResponse.getEntity(),
+                                    StandardCharsets.UTF_8);
+                    LOG.debug("Obtained response from Foreman: {}", response);
                 }
-            } else {
-                LOG.warn("Failed to obtain commands: {}", code);
+            } catch (final IOException ioe) {
+                LOG.warn("Exception occurred while GETing", ioe);
             }
-        } catch (final Exception e) {
-            LOG.warn("Exception occurred during get", e);
+        } catch (final IOException | URISyntaxException ioe) {
+            LOG.warn("Exception occurred while GETing", ioe);
         }
 
         return Optional.ofNullable(response);
@@ -272,6 +253,7 @@ public class JdkWebUtil
                             EntityUtils.toString(
                                     httpResponse.getEntity(),
                                     StandardCharsets.UTF_8);
+                    LOG.debug("Obtained response from Foreman: {}", response);
                 }
             } catch (final IOException ioe) {
                 LOG.warn("Exception occurred while posting", ioe);

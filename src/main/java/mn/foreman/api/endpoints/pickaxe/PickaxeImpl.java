@@ -167,6 +167,31 @@ public class PickaxeImpl
     }
 
     @Override
+    public List<MinerConfig> minerConfigs(
+            final String version,
+            final String hostname,
+            final String hostIp) {
+        return this.webUtil.get(
+                String.format(
+                        "/api/config/%s/%s/%s/",
+                        this.clientId,
+                        this.pickaxeId,
+                        version),
+                ImmutableMap.of(
+                        "hostname",
+                        hostname,
+                        "ip",
+                        hostIp))
+                .flatMap(
+                        s -> JsonUtils.fromJson(
+                                s,
+                                this.objectMapper,
+                                new TypeReference<List<MinerConfig>>() {
+                                }))
+                .orElse(Collections.emptyList());
+    }
+
+    @Override
     public boolean updateMacs(final Map<Miners.Miner, String> newMacs) {
         boolean updated = false;
         final List<List<MacUpdate>> macUpdates =

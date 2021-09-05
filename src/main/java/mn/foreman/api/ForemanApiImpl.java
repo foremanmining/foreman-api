@@ -2,10 +2,16 @@ package mn.foreman.api;
 
 import mn.foreman.api.endpoints.actions.Actions;
 import mn.foreman.api.endpoints.actions.ActionsImpl;
+import mn.foreman.api.endpoints.autominer.Autominer;
+import mn.foreman.api.endpoints.autominer.AutominerImpl;
+import mn.foreman.api.endpoints.claymore.Claymore;
+import mn.foreman.api.endpoints.claymore.ClaymoreImpl;
 import mn.foreman.api.endpoints.groups.Groups;
 import mn.foreman.api.endpoints.groups.GroupsImpl;
 import mn.foreman.api.endpoints.miners.Miners;
 import mn.foreman.api.endpoints.miners.MinersImpl;
+import mn.foreman.api.endpoints.nicehash.Nicehash;
+import mn.foreman.api.endpoints.nicehash.NicehashImpl;
 import mn.foreman.api.endpoints.notifications.Notifications;
 import mn.foreman.api.endpoints.notifications.NotificationsImpl;
 import mn.foreman.api.endpoints.pickaxe.Pickaxe;
@@ -62,6 +68,20 @@ public class ForemanApiImpl
     }
 
     @Override
+    public Autominer autominer() {
+        return new AutominerImpl(
+                this.objectMapper,
+                this.webUtil);
+    }
+
+    @Override
+    public Claymore claymore() {
+        return new ClaymoreImpl(
+                this.objectMapper,
+                this.webUtil);
+    }
+
+    @Override
     public Groups groups() {
         return new GroupsImpl(
                 this.clientId,
@@ -74,6 +94,13 @@ public class ForemanApiImpl
         return new MinersImpl(
                 this.clientId,
                 this.pickaxeId,
+                this.objectMapper,
+                this.webUtil);
+    }
+
+    @Override
+    public Nicehash nicehash() {
+        return new NicehashImpl(
                 this.objectMapper,
                 this.webUtil);
     }

@@ -1,8 +1,11 @@
 package mn.foreman.api;
 
 import mn.foreman.api.endpoints.actions.Actions;
+import mn.foreman.api.endpoints.autominer.Autominer;
+import mn.foreman.api.endpoints.claymore.Claymore;
 import mn.foreman.api.endpoints.groups.Groups;
 import mn.foreman.api.endpoints.miners.Miners;
+import mn.foreman.api.endpoints.nicehash.Nicehash;
 import mn.foreman.api.endpoints.notifications.Notifications;
 import mn.foreman.api.endpoints.pickaxe.Pickaxe;
 import mn.foreman.api.endpoints.ping.Ping;
@@ -24,6 +27,20 @@ public interface ForemanApi {
     Actions actions();
 
     /**
+     * Creates an {@link Autominer} handler.
+     *
+     * @return The handler.
+     */
+    Autominer autominer();
+
+    /**
+     * Creates a {@link Claymore} handlers.
+     *
+     * @return The handler.
+     */
+    Claymore claymore();
+
+    /**
      * Creates a new {@link Actions} that can be leveraged to operate on the
      * <code>/api/groups</code> Foreman API endpoint.
      *
@@ -38,6 +55,13 @@ public interface ForemanApi {
      * @return The API handler.
      */
     Miners miners();
+
+    /**
+     * Creates a {@link Nicehash} handler.
+     *
+     * @return The handler.
+     */
+    Nicehash nicehash();
 
     /**
      * Creates a new {@link Notifications} that can be leveraged to operate on
