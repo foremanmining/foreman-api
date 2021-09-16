@@ -14,4 +14,8 @@ public class Commands {
     /** The commands to run. */
     @JsonProperty("commands")
     public List<CommandStart> commands;
+
+    /** How long to wait before polling for commands again. */
+    @JsonProperty("delaySeconds")
+    public int delaySeconds;
 }
