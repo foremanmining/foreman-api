@@ -2,6 +2,7 @@ package mn.foreman.api.endpoints.notifications;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
 
 import java.time.Instant;
 import java.util.List;
@@ -38,6 +39,7 @@ public interface Notifications {
 
     /** A notification. */
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @ToString
     class Notification {
 
         /** The failing miners. */
@@ -58,6 +60,7 @@ public interface Notifications {
 
         /** A miner that is currently failing. */
         @JsonIgnoreProperties(ignoreUnknown = true)
+        @ToString
         public static class FailingMiner {
 
             /** The diagnosis. */
