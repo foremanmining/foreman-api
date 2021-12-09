@@ -61,9 +61,9 @@ public class PickaxeImpl
     @Override
     public List<PickaxeInstance> all() {
         return this.webUtil.get(
-                String.format(
-                        "/api/pickaxe/%s",
-                        this.clientId))
+                        String.format(
+                                "/api/pickaxe/%s",
+                                this.clientId))
                 .flatMap(
                         s -> JsonUtils.fromJson(
                                 s,
@@ -172,16 +172,16 @@ public class PickaxeImpl
             final String hostname,
             final String hostIp) {
         return this.webUtil.get(
-                String.format(
-                        "/api/config/%s/%s/%s/",
-                        this.clientId,
-                        this.pickaxeId,
-                        version),
-                ImmutableMap.of(
-                        "hostname",
-                        hostname,
-                        "ip",
-                        hostIp))
+                        String.format(
+                                "/api/config/%s/%s/%s/",
+                                this.clientId,
+                                this.pickaxeId,
+                                version),
+                        ImmutableMap.of(
+                                "hostname",
+                                hostname,
+                                "ip",
+                                hostIp))
                 .flatMap(
                         s -> JsonUtils.fromJson(
                                 s,
@@ -237,6 +237,26 @@ public class PickaxeImpl
         return updated;
     }
 
+    @Override
+    public boolean started() {
+        return this.webUtil.post(
+                        String.format(
+                                "/api/pickaxe/%s/started",
+                                this.pickaxeId))
+                .map(s -> s.contains("success"))
+                .orElse(false);
+    }
+
+    /**
+     * Runs a command.
+     *
+     * @param command The command.
+     * @param uri     The uri.
+     * @param <T>     The command type.
+     * @param <R>     The response type.
+     *
+     * @return The result.
+     */
     private <T, R> Optional<R> runStandardCommand(
             final T command,
             final String uri) {

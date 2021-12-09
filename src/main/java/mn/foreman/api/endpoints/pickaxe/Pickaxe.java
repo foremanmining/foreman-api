@@ -117,13 +117,20 @@ public interface Pickaxe {
             String hostIp);
 
     /**
-     * Sets the MACs for the provided miners..
+     * Sets the MACs for the provided miners.
      *
      * @param newMacs The new MACs.
      *
-     * @return Whether or not the command was successful.
+     * @return Whether the command was successful.
      */
     boolean updateMacs(Map<Miners.Miner, String> newMacs);
+
+    /**
+     * Informs Foreman that the Pickaxe has started.
+     *
+     * @return Whether successful.
+     */
+    boolean started();
 
     /** A miner configuration. */
     @JsonIgnoreProperties(ignoreUnknown = true)
