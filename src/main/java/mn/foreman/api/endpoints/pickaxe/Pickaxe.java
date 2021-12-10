@@ -111,7 +111,7 @@ public interface Pickaxe {
      *
      * @return The miner configurations.
      */
-    List<MinerConfig> minerConfigs(
+    Optional<List<MinerConfig>> minerConfigs(
             String version,
             String hostname,
             String hostIp);
