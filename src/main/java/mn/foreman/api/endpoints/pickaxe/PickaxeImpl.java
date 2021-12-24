@@ -74,6 +74,20 @@ public class PickaxeImpl
     }
 
     @Override
+    public Optional<List<Integer>> cancelCommands() {
+        return this.webUtil.post(
+                String.format(
+                        "/api/pickaxe/%s/commands/cancel",
+                        this.pickaxeId))
+                .flatMap(s ->
+                        JsonUtils.fromJson(
+                                s,
+                                this.objectMapper,
+                                new TypeReference<List<Integer>>() {
+                                }));
+    }
+
+    @Override
     public Optional<CommandDone.Response> commandDone(
             final CommandDone done,
             final String commandId) {

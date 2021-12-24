@@ -25,6 +25,13 @@ public interface Pickaxe {
     List<PickaxeInstance> all();
 
     /**
+     * Cancels all of the pending or in-progress commands on this Pickaxe.
+     *
+     * @return The cancelled command IDs.
+     */
+    Optional<List<Integer>> cancelCommands();
+
+    /**
      * Sends a command completion to the Foreman API.
      *
      * @param done      The completed command.
@@ -117,6 +124,13 @@ public interface Pickaxe {
             String hostIp);
 
     /**
+     * Informs Foreman that the Pickaxe has started.
+     *
+     * @return Whether successful.
+     */
+    boolean started();
+
+    /**
      * Sets the MACs for the provided miners.
      *
      * @param newMacs The new MACs.
@@ -124,13 +138,6 @@ public interface Pickaxe {
      * @return Whether the command was successful.
      */
     boolean updateMacs(Map<Miners.Miner, String> newMacs);
-
-    /**
-     * Informs Foreman that the Pickaxe has started.
-     *
-     * @return Whether successful.
-     */
-    boolean started();
 
     /** A miner configuration. */
     @JsonIgnoreProperties(ignoreUnknown = true)
