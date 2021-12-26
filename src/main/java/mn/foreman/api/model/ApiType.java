@@ -187,7 +187,10 @@ public enum ApiType {
     IBELINK_API(59),
 
     /** teamblackminer. */
-    TEAMBLACKMINER(60);
+    TEAMBLACKMINER(60),
+
+    /** cheetahminer. */
+    CHEETAHMINER(61);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
