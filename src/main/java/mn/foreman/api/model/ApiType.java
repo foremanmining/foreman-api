@@ -190,7 +190,10 @@ public enum ApiType {
     TEAMBLACKMINER(60),
 
     /** cheetahminer. */
-    CHEETAHMINER(61);
+    CHEETAHMINER(61),
+
+    /** jasminer. */
+    JASMINER(62);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
