@@ -193,7 +193,10 @@ public enum ApiType {
     CHEETAHMINER(61),
 
     /** jasminer. */
-    JASMINER(62);
+    JASMINER(62),
+
+    /** horizon. */
+    HORIZON(63);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
