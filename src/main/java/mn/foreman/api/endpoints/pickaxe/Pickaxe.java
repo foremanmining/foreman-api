@@ -206,6 +206,14 @@ public interface Pickaxe {
     @JsonIgnoreProperties(ignoreUnknown = true)
     class PickaxeConfiguration {
 
+        /** The collect delay. */
+        @JsonProperty("collectDelay")
+        public int collectDelay;
+
+        /** The collect delay (units). */
+        @JsonProperty("collectDelayUnits")
+        public String collectDelayUnits;
+
         /** The command completion batch size. */
         @JsonProperty("commandCompletionBatchSize")
         public int commandCompletionBatchSize;
@@ -213,6 +221,14 @@ public interface Pickaxe {
         /** Whether or not metrics should be compressed. */
         @JsonProperty("compressMetrics")
         public boolean compressMetrics;
+
+        /** The metrics push delay. */
+        @JsonProperty("metricsPushDelay")
+        public int metricsPushDelay;
+
+        /** The metrics push delay (units). */
+        @JsonProperty("metricsPushDelayUnits")
+        public String metricsPushDelayUnits;
 
         /** The read socket timeout. */
         @JsonProperty("readSocketTimeout")
