@@ -218,6 +218,10 @@ public interface Pickaxe {
         @JsonProperty("commandCompletionBatchSize")
         public int commandCompletionBatchSize;
 
+        /** The number of threads to use for processing commands. */
+        @JsonProperty("commandThreadsOverride")
+        public Integer commandThreadsOverride;
+
         /** Whether or not metrics should be compressed. */
         @JsonProperty("compressMetrics")
         public boolean compressMetrics;
