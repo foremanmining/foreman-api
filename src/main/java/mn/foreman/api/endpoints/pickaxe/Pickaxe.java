@@ -242,6 +242,10 @@ public interface Pickaxe {
         @JsonProperty("readSocketTimeoutUnits")
         public String readSocketTimeoutUnits;
 
+        /** The number of threads to use for stats querying. */
+        @JsonProperty("statsThreadsOverride")
+        public Integer statsThreadsOverride;
+
         /** The write socket timeout. */
         @JsonProperty("writeSocketTimeout")
         public int writeSocketTimeout;
