@@ -234,6 +234,10 @@ public interface Pickaxe {
         @JsonProperty("metricsPushDelayUnits")
         public String metricsPushDelayUnits;
 
+        /** The number of threads to use for metrics sending. */
+        @JsonProperty("metricsThreadsOverride")
+        public Integer metricsThreadsOverride;
+
         /** The read socket timeout. */
         @JsonProperty("readSocketTimeout")
         public int readSocketTimeout;
