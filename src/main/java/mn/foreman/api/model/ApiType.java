@@ -196,7 +196,10 @@ public enum ApiType {
     JASMINER(62),
 
     /** horizon. */
-    HORIZON(63);
+    HORIZON(63),
+
+    /** enigma. */
+    ENIGMA(64);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
