@@ -238,6 +238,10 @@ public interface Pickaxe {
         @JsonProperty("metricsThreadsOverride")
         public Integer metricsThreadsOverride;
 
+        /** The number of threads to use for scanning (ranges). */
+        @JsonProperty("rangesScannerThreadsOverride")
+        public Integer rangesScannerThreadsOverride;
+
         /** The read socket timeout. */
         @JsonProperty("readSocketTimeout")
         public int readSocketTimeout;
@@ -246,9 +250,21 @@ public interface Pickaxe {
         @JsonProperty("readSocketTimeoutUnits")
         public String readSocketTimeoutUnits;
 
+        /** The number of threads to use for scanning (start/stop). */
+        @JsonProperty("startStopScannerThreadsOverride")
+        public Integer startStopScannerThreadsOverride;
+
         /** The number of threads to use for stats querying. */
         @JsonProperty("statsThreadsOverride")
         public Integer statsThreadsOverride;
+
+        /** The number of threads to use for scanning (targeted, ranges). */
+        @JsonProperty("targetedRangesScannerThreadsOverride")
+        public Integer targetedRangesScannerThreadsOverride;
+
+        /** The number of threads to use for scanning (targeted, start/stop). */
+        @JsonProperty("targetedStartStopScannerThreadsOverride")
+        public Integer targetedStartStopScannerThreadsOverride;
 
         /** The write socket timeout. */
         @JsonProperty("writeSocketTimeout")
