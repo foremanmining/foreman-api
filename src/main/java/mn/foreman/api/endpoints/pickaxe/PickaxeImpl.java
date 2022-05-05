@@ -83,8 +83,9 @@ public class PickaxeImpl
                         JsonUtils.fromJson(
                                 s,
                                 this.objectMapper,
-                                new TypeReference<List<Integer>>() {
-                                }));
+                                new TypeReference<CancelledCommands>() {
+                                })
+                                .map(cancelledCommands -> cancelledCommands.cancelledIds));
     }
 
     @Override

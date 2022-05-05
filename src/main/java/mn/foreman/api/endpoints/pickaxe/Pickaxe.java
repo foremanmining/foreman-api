@@ -139,6 +139,15 @@ public interface Pickaxe {
      */
     boolean updateMacs(Map<Miners.Miner, String> newMacs);
 
+    /** All of the cancelled commands. */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    class CancelledCommands {
+
+        /** The cancelled IDs. */
+        @JsonProperty("cancelledIds")
+        public List<Integer> cancelledIds;
+    }
+
     /** A miner configuration. */
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonInclude(JsonInclude.Include.NON_NULL)
