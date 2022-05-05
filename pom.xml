@@ -39,7 +39,6 @@
         <guava.version>24.1.1-jre</guava.version>
         <jackson.version>2.9.10</jackson.version>
         <jackson-databind.version>2.9.10.5</jackson-databind.version>
-        <logback.version>1.2.3</logback.version>
         <lombok.version>1.18.12</lombok.version>
         <slf.version>1.7.25</slf.version>
 
@@ -97,11 +96,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
         </dependency>
     </dependencies>
 
