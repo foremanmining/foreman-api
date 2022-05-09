@@ -18,14 +18,12 @@
 
     <distributionManagement>
         <repository>
-            <id>central</id>
-            <name>2666cfb367e1-releases</name>
-            <url>https://artifactory.foreman.mn/artifactory/libs-release</url>
+            <id>gcp-releases</id>
+            <url>artifactregistry://us-maven.pkg.dev/foreman-production/releases</url>
         </repository>
         <snapshotRepository>
-            <id>snapshots</id>
-            <name>2666cfb367e1-snapshots</name>
-            <url>https://artifactory.foreman.mn/artifactory/libs-snapshot</url>
+            <id>gcp-snapshots</id>
+            <url>artifactregistry://us-maven.pkg.dev/foreman-production/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -34,6 +32,7 @@
         <java.version>1.8</java.version>
 
         <apache-httpclient.version>4.5.6</apache-httpclient.version>
+        <artifact-registry.version>2.1.0</artifact-registry.version>
         <commons-io.version>2.6</commons-io.version>
         <commons-lang.version>3.7</commons-lang.version>
         <guava.version>24.1.1-jre</guava.version>
@@ -111,5 +110,12 @@
                 </configuration>
             </plugin>
         </plugins>
+        <extensions>
+            <extension>
+                <groupId>com.google.cloud.artifactregistry</groupId>
+                <artifactId>artifactregistry-maven-wagon</artifactId>
+                <version>${artifact-registry.version}</version>
+            </extension>
+        </extensions>
     </build>
 </project>
