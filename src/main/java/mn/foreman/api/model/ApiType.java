@@ -199,7 +199,10 @@ public enum ApiType {
     HORIZON(63),
 
     /** enigma. */
-    ENIGMA(64);
+    ENIGMA(64),
+
+    /** aladdin. */
+    ALADDIN(65);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
