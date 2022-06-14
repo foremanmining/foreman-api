@@ -26,6 +26,18 @@ public interface Notifications {
             Instant sinceTimestamp);
 
     /**
+     * Obtains the Slack notifications.
+     *
+     * @param sinceId        The previously observed id (-1 to disable).
+     * @param sinceTimestamp The cutoff date (null to disable).
+     *
+     * @return The Slack notifications.
+     */
+    List<Notification> slack(
+            int sinceId,
+            Instant sinceTimestamp);
+
+    /**
      * Obtains the Telegram notifications.
      *
      * @param sinceId        The previously observed id (-1 to disable).

@@ -52,6 +52,16 @@ public class NotificationsImpl
     }
 
     @Override
+    public List<Notification> slack(
+            final int sinceId,
+            final Instant sinceTimestamp) {
+        return getNotifications(
+                sinceId,
+                sinceTimestamp,
+                "slack");
+    }
+
+    @Override
     public List<Notification> telegram(
             final int sinceId,
             final Instant sinceTimestamp) {
