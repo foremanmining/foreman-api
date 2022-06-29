@@ -235,6 +235,14 @@ public interface Pickaxe {
         @JsonProperty("compressMetrics")
         public boolean compressMetrics;
 
+        /** The command query delay. */
+        @JsonProperty("commandQueryDelay")
+        public int commandQueryDelay;
+
+        /** The command query delay (units). */
+        @JsonProperty("commandQueryDelayUnits")
+        public String commandQueryDelayUnits;
+
         /** The metrics push delay. */
         @JsonProperty("metricsPushDelay")
         public int metricsPushDelay;
