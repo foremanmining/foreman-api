@@ -290,7 +290,7 @@ public class PickaxeImpl
                                 new TypeReference<R>() {
                                 });
             }
-        } catch (final JsonProcessingException e) {
+        } catch (final Exception e) {
             LOG.warn("Exception occurred while parsing json", e);
         }
         return result;
