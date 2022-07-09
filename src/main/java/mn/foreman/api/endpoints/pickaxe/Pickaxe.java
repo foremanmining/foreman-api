@@ -227,6 +227,14 @@ public interface Pickaxe {
         @JsonProperty("commandCompletionBatchSize")
         public int commandCompletionBatchSize;
 
+        /** The command query delay. */
+        @JsonProperty("commandQueryDelay")
+        public int commandQueryDelay;
+
+        /** The command query delay (units). */
+        @JsonProperty("commandQueryDelayUnits")
+        public String commandQueryDelayUnits;
+
         /** The number of threads to use for processing commands. */
         @JsonProperty("commandThreadsOverride")
         public Integer commandThreadsOverride;
@@ -235,13 +243,9 @@ public interface Pickaxe {
         @JsonProperty("compressMetrics")
         public boolean compressMetrics;
 
-        /** The command query delay. */
-        @JsonProperty("commandQueryDelay")
-        public int commandQueryDelay;
-
-        /** The command query delay (units). */
-        @JsonProperty("commandQueryDelayUnits")
-        public String commandQueryDelayUnits;
+        /** The size of each metrics batch. */
+        @JsonProperty("metricsBatchSize")
+        public Integer metricsBatchSize;
 
         /** The metrics push delay. */
         @JsonProperty("metricsPushDelay")
@@ -251,13 +255,25 @@ public interface Pickaxe {
         @JsonProperty("metricsPushDelayUnits")
         public String metricsPushDelayUnits;
 
+        /** The number of IPs to scan per second. */
+        @JsonProperty("metricsRateLimit")
+        public Integer metricsRateLimit;
+
         /** The number of threads to use for metrics sending. */
         @JsonProperty("metricsThreadsOverride")
         public Integer metricsThreadsOverride;
 
+        /** The number of IPs to scan per second. */
+        @JsonProperty("rangesRateLimit")
+        public Integer rangesRateLimit;
+
         /** The number of threads to use for scanning (ranges). */
         @JsonProperty("rangesScannerThreadsOverride")
         public Integer rangesScannerThreadsOverride;
+
+        /** The number of IPs to scan per second. */
+        @JsonProperty("rangesTargetedRateLimit")
+        public Integer rangesTargetedRateLimit;
 
         /** The read socket timeout. */
         @JsonProperty("readSocketTimeout")
@@ -267,9 +283,17 @@ public interface Pickaxe {
         @JsonProperty("readSocketTimeoutUnits")
         public String readSocketTimeoutUnits;
 
+        /** The number of IPs to scan per second. */
+        @JsonProperty("startStopRateLimit")
+        public Integer startStopRateLimit;
+
         /** The number of threads to use for scanning (start/stop). */
         @JsonProperty("startStopScannerThreadsOverride")
         public Integer startStopScannerThreadsOverride;
+
+        /** The number of IPs to scan per second. */
+        @JsonProperty("startStopTargetedRateLimit")
+        public Integer startStopTargetedRateLimit;
 
         /** The number of threads to use for stats querying. */
         @JsonProperty("statsThreadsOverride")
