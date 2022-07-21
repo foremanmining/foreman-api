@@ -26,6 +26,18 @@ public interface Notifications {
             Instant sinceTimestamp);
 
     /**
+     * Obtains the Google Chat notifications.
+     *
+     * @param sinceId        The previously observed id (-1 to disable).
+     * @param sinceTimestamp The cutoff date (null to disable).
+     *
+     * @return The Google Chat notifications.
+     */
+    List<Notification> googleChat(
+            int sinceId,
+            Instant sinceTimestamp);
+
+    /**
      * Obtains the Slack notifications.
      *
      * @param sinceId        The previously observed id (-1 to disable).

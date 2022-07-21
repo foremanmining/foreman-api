@@ -52,6 +52,16 @@ public class NotificationsImpl
     }
 
     @Override
+    public List<Notification> googleChat(
+            final int sinceId,
+            final Instant sinceTimestamp) {
+        return getNotifications(
+                sinceId,
+                sinceTimestamp,
+                "google-chat");
+    }
+
+    @Override
     public List<Notification> slack(
             final int sinceId,
             final Instant sinceTimestamp) {
