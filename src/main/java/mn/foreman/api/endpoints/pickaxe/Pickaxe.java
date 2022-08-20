@@ -263,6 +263,10 @@ public interface Pickaxe {
         @JsonProperty("metricsThreadsOverride")
         public Integer metricsThreadsOverride;
 
+        /** Whether priority power integration is enabled. */
+        @JsonProperty("priorityEnabled")
+        public boolean priorityEnabled;
+
         /** The priority power RTAC client address. */
         @JsonProperty("priorityRtacClientAddress")
         public int priorityRtacClientAddress;
