@@ -9,6 +9,7 @@ import mn.foreman.api.endpoints.nicehash.Nicehash;
 import mn.foreman.api.endpoints.notifications.Notifications;
 import mn.foreman.api.endpoints.pickaxe.Pickaxe;
 import mn.foreman.api.endpoints.ping.Ping;
+import mn.foreman.api.endpoints.qse.Qse;
 import mn.foreman.api.endpoints.sitemap.SiteMap;
 import mn.foreman.api.endpoints.tags.Tags;
 
@@ -86,6 +87,13 @@ public interface ForemanApi {
      * @return The new {@link Ping}.
      */
     Ping ping();
+
+    /**
+     * Creates a {@link Qse} handler.
+     *
+     * @return The handler.
+     */
+    Qse qse();
 
     /**
      * Creates a new {@link SiteMap} that can be leveraged to operate on the

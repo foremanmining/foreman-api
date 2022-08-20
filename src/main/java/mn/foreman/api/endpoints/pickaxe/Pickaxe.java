@@ -263,6 +263,22 @@ public interface Pickaxe {
         @JsonProperty("metricsThreadsOverride")
         public Integer metricsThreadsOverride;
 
+        /** The priority power RTAC client address. */
+        @JsonProperty("priorityRtacClientAddress")
+        public int priorityRtacClientAddress;
+
+        /** The priority power RTAC IP address. */
+        @JsonProperty("priorityRtacIp")
+        public String priorityRtacIp;
+
+        /** The priority power RTAC port. */
+        @JsonProperty("priorityRtacPort")
+        public int priorityRtacPort;
+
+        /** The priority power RTAC server address. */
+        @JsonProperty("priorityRtacServerAddress")
+        public int priorityRtacServerAddress;
+
         /** The number of IPs to scan per second. */
         @JsonProperty("rangesRateLimit")
         public Integer rangesRateLimit;

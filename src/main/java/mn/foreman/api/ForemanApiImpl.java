@@ -18,6 +18,8 @@ import mn.foreman.api.endpoints.pickaxe.Pickaxe;
 import mn.foreman.api.endpoints.pickaxe.PickaxeImpl;
 import mn.foreman.api.endpoints.ping.Ping;
 import mn.foreman.api.endpoints.ping.PingImpl;
+import mn.foreman.api.endpoints.qse.Qse;
+import mn.foreman.api.endpoints.qse.QseImpl;
 import mn.foreman.api.endpoints.sitemap.SiteMap;
 import mn.foreman.api.endpoints.sitemap.SiteMapImpl;
 import mn.foreman.api.endpoints.tags.Tags;
@@ -126,6 +128,14 @@ public class ForemanApiImpl
     public Ping ping() {
         return new PingImpl(
                 this.clientId,
+                this.webUtil);
+    }
+
+    @Override
+    public Qse qse() {
+        return new QseImpl(
+                this.pickaxeId,
+                this.objectMapper,
                 this.webUtil);
     }
 
