@@ -54,7 +54,7 @@ public class PriorityPowerImpl
             final Optional<String> response =
                     this.webUtil.post(
                             String.format(
-                                    "/qse/prioritypower/rtac/%s/stats",
+                                    "/qse/prioritypower/rtac/%s/state",
                                     this.pickaxeId),
                             this.objectMapper.writeValueAsString(
                                     ImmutableMap.of(

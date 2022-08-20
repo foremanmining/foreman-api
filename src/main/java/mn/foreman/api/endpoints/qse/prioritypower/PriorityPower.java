@@ -1,6 +1,7 @@
 package mn.foreman.api.endpoints.qse.prioritypower;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.util.Optional;
@@ -27,6 +28,7 @@ public interface PriorityPower {
 
     /** The load to configure into the RTAC. */
     @Builder
+    @Getter
     @ToString
     class CurrentLoad {
 
