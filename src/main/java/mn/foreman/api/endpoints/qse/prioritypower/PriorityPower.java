@@ -1,8 +1,7 @@
 package mn.foreman.api.endpoints.qse.prioritypower;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Optional;
 
@@ -27,15 +26,19 @@ public interface PriorityPower {
             double targetSetPoint);
 
     /** The load to configure into the RTAC. */
-    @Builder
-    @Getter
-    @ToString
+    @JsonIgnoreProperties(ignoreUnknown = true)
     class CurrentLoad {
 
         /** The high limit. */
-        double highLimit;
+        @JsonProperty("highLimit")
+        public double highLimit;
 
         /** The low limit. */
-        double lowLimit;
+        @JsonProperty("lowLimit")
+        public double lowLimit;
+
+        /** The curtailment run ID. */
+        @JsonProperty("curtailmentRunId")
+        public Integer runId;
     }
 }
