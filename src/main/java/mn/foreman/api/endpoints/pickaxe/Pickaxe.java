@@ -243,6 +243,10 @@ public interface Pickaxe {
         @JsonProperty("compressMetrics")
         public boolean compressMetrics;
 
+        /** The JVM arguments. */
+        @JsonProperty("jvmArguments")
+        public String jvmArguments;
+
         /** The size of each metrics batch. */
         @JsonProperty("metricsBatchSize")
         public Integer metricsBatchSize;
