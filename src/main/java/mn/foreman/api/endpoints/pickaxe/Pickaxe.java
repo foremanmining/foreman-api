@@ -253,7 +253,7 @@ public interface Pickaxe {
 
         /** The CPower PLC password. */
         @JsonProperty("cpowerPlcPassword")
-        public int cpowerPlcPassword;
+        public String cpowerPlcPassword;
 
         /** The CPower PLC port. */
         @JsonProperty("cpowerPlcPort")
@@ -261,7 +261,7 @@ public interface Pickaxe {
 
         /** The CPower PLC username. */
         @JsonProperty("cpowerPlcUsername")
-        public int cpowerPlcUsername;
+        public String cpowerPlcUsername;
 
         /** The JVM arguments. */
         @JsonProperty("jvmArguments")
