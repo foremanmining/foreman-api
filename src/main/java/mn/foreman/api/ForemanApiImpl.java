@@ -6,6 +6,8 @@ import mn.foreman.api.endpoints.autominer.Autominer;
 import mn.foreman.api.endpoints.autominer.AutominerImpl;
 import mn.foreman.api.endpoints.claymore.Claymore;
 import mn.foreman.api.endpoints.claymore.ClaymoreImpl;
+import mn.foreman.api.endpoints.csp.Csp;
+import mn.foreman.api.endpoints.csp.CspImpl;
 import mn.foreman.api.endpoints.groups.Groups;
 import mn.foreman.api.endpoints.groups.GroupsImpl;
 import mn.foreman.api.endpoints.miners.Miners;
@@ -79,6 +81,14 @@ public class ForemanApiImpl
     @Override
     public Claymore claymore() {
         return new ClaymoreImpl(
+                this.objectMapper,
+                this.webUtil);
+    }
+
+    @Override
+    public Csp csp() {
+        return new CspImpl(
+                this.pickaxeId,
                 this.objectMapper,
                 this.webUtil);
     }

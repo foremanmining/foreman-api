@@ -3,6 +3,7 @@ package mn.foreman.api;
 import mn.foreman.api.endpoints.actions.Actions;
 import mn.foreman.api.endpoints.autominer.Autominer;
 import mn.foreman.api.endpoints.claymore.Claymore;
+import mn.foreman.api.endpoints.csp.Csp;
 import mn.foreman.api.endpoints.groups.Groups;
 import mn.foreman.api.endpoints.miners.Miners;
 import mn.foreman.api.endpoints.nicehash.Nicehash;
@@ -40,6 +41,13 @@ public interface ForemanApi {
      * @return The handler.
      */
     Claymore claymore();
+
+    /**
+     * Creates a {@link Csp} handler.
+     *
+     * @return The handler.
+     */
+    Csp csp();
 
     /**
      * Creates a new {@link Actions} that can be leveraged to operate on the
