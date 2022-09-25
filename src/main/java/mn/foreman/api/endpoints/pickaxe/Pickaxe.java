@@ -243,6 +243,26 @@ public interface Pickaxe {
         @JsonProperty("compressMetrics")
         public boolean compressMetrics;
 
+        /** Whether the CPower PLC integration is enabled. */
+        @JsonProperty("cpowerPlcEnabled")
+        public boolean cpowerPlcEnabled;
+
+        /** The CPower PLC IP address. */
+        @JsonProperty("cpowerPlcIp")
+        public String cpowerPlcIp;
+
+        /** The CPower PLC password. */
+        @JsonProperty("cpowerPlcPassword")
+        public int cpowerPlcPassword;
+
+        /** The CPower PLC port. */
+        @JsonProperty("cpowerPlcPort")
+        public int cpowerPlcPort;
+
+        /** The CPower PLC username. */
+        @JsonProperty("cpowerPlcUsername")
+        public int cpowerPlcUsername;
+
         /** The JVM arguments. */
         @JsonProperty("jvmArguments")
         public String jvmArguments;
