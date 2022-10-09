@@ -335,6 +335,10 @@ public interface Pickaxe {
         @JsonProperty("infrastructureMetricsPushDelayUnits")
         public String infrastructureMetricsPushDelayUnits;
 
+        /** The number of threads to use for infrastructure metrics sending. */
+        @JsonProperty("infrastructureMetricsThreadsOverride")
+        public Integer infrastructureMetricsThreadsOverride;
+
         /** The number of threads to use for infrastructure querying. */
         @JsonProperty("infrastructureThreadsOverride")
         public Integer infrastructureThreadsOverride;
@@ -346,7 +350,7 @@ public interface Pickaxe {
         /** The size of each metrics batch. */
         @JsonProperty("metricsBatchSize")
         public Integer metricsBatchSize;
-        
+
         /** The metrics push delay. */
         @JsonProperty("metricsPushDelay")
         public int metricsPushDelay;
