@@ -1,10 +1,26 @@
 package mn.foreman.api.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /** All of the known infrastructure types. */
 public enum InfrastructureType {
 
     /** The cooling tower. */
     ANTSPACE_COOLING_TOWER("bitmain-liquid-cooling-tower");
+
+    /** A mapping of {@link #type} to {@link InfrastructureType}. */
+    private static final Map<String, InfrastructureType> MAPPINGS;
+
+    static {
+        MAPPINGS = new ConcurrentHashMap<>();
+        for (final InfrastructureType type : values()) {
+            MAPPINGS.put(type.getType(), type);
+        }
+    }
 
     /** The type. */
     private final String type;
@@ -19,10 +35,23 @@ public enum InfrastructureType {
     }
 
     /**
+     * Returns the type for the provided value.
+     *
+     * @param value The value.
+     *
+     * @return The type.
+     */
+    @JsonCreator
+    public static InfrastructureType forValue(final String value) {
+        return MAPPINGS.get(value);
+    }
+
+    /**
      * Returns the type.
      *
      * @return The type.
      */
+    @JsonValue
     public String getType() {
         return this.type;
     }
