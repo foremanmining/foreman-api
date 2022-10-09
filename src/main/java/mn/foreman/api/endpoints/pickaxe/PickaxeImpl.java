@@ -182,6 +182,35 @@ public class PickaxeImpl
     }
 
     @Override
+    public Optional<List<InfrastructureConfig>> infrastructureConfigs() {
+        return this.webUtil.get(
+                String.format(
+                        "/api/pickaxe/%s/devices-config",
+                        this.pickaxeId))
+                .flatMap(
+                        s -> JsonUtils.fromJson(
+                                s,
+                                this.objectMapper,
+                                new TypeReference<List<InfrastructureConfig>>() {
+                                }));
+    }
+
+    @Override
+    public boolean infrastructureUpdate(final List<InfrastructureStats> stats) {
+        try {
+            this.webUtil.post(
+                    String.format(
+                            "/api/pickaxe/%s/devices-update",
+                            this.pickaxeId),
+                    this.objectMapper.writeValueAsString(stats));
+            return true;
+        } catch (final Exception e) {
+            LOG.warn("Failed to publish infrastructure stats: {}", stats, e);
+        }
+        return false;
+    }
+
+    @Override
     public Optional<List<MinerConfig>> minerConfigs(
             final String version,
             final String hostname,

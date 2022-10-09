@@ -6,6 +6,9 @@ import mn.foreman.api.model.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Singular;
 
 import java.util.List;
 import java.util.Map;
@@ -110,6 +113,22 @@ public interface Pickaxe {
     Optional<Commands> getCommands();
 
     /**
+     * Returns the infrastructure configs.
+     *
+     * @return The infrastructure configs.
+     */
+    Optional<List<InfrastructureConfig>> infrastructureConfigs();
+
+    /**
+     * Publishes the provided stats to the Foreman API.
+     *
+     * @param stats The stats.
+     *
+     * @return Whether successful.
+     */
+    boolean infrastructureUpdate(List<InfrastructureStats> stats);
+
+    /**
      * Returns the miner configurations.
      *
      * @param version  The version.
@@ -146,6 +165,39 @@ public interface Pickaxe {
         /** The cancelled IDs. */
         @JsonProperty("cancelledIds")
         public List<Integer> cancelledIds;
+    }
+
+    /** An infrastructure configuration. */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    class InfrastructureConfig {
+
+        /** The ID. */
+        @JsonProperty("id")
+        public int id;
+
+        /** The info. */
+        @JsonProperty("info")
+        public Map<String, String> info;
+
+        /** The type. */
+        @JsonProperty("type")
+        public InfrastructureType type;
+    }
+
+    /** The stats for a device. */
+    @Data
+    @Builder
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    class InfrastructureStats {
+
+        /** The ID. */
+        @JsonProperty("id")
+        private final int id;
+
+        /** The stats. */
+        @Singular
+        private final Map<String, Object> stats;
     }
 
     /** A miner configuration. */
@@ -262,6 +314,10 @@ public interface Pickaxe {
         /** The CPower PLC username. */
         @JsonProperty("cpowerPlcUsername")
         public String cpowerPlcUsername;
+
+        /** The number of threads to use for infrastructure querying. */
+        @JsonProperty("infrastructureThreadsOverride")
+        public Integer infrastructureThreadsOverride;
 
         /** The JVM arguments. */
         @JsonProperty("jvmArguments")
