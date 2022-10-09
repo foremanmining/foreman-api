@@ -315,6 +315,14 @@ public interface Pickaxe {
         @JsonProperty("cpowerPlcUsername")
         public String cpowerPlcUsername;
 
+        /** The infrastructure collect delay. */
+        @JsonProperty("infrastructureCollectDelay")
+        public int infrastructureCollectDelay;
+
+        /** The infrastructure collect delay (units). */
+        @JsonProperty("infrastructureCollectDelayUnits")
+        public String infrastructureCollectDelayUnits;
+
         /** The number of threads to use for infrastructure querying. */
         @JsonProperty("infrastructureThreadsOverride")
         public Integer infrastructureThreadsOverride;
