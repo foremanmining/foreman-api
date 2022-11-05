@@ -10,7 +10,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public enum InfrastructureType {
 
     /** The cooling tower. */
-    ANTSPACE_COOLING_TOWER("bitmain-liquid-cooling-tower");
+    ANTSPACE_COOLING_TOWER("bitmain-liquid-cooling-tower"),
+
+    /** A managed switch. */
+    MANAGED_SWITCH("managed-switch");
 
     /** A mapping of {@link #type} to {@link InfrastructureType}. */
     private static final Map<String, InfrastructureType> MAPPINGS;
