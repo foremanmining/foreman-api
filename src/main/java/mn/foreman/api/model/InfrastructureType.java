@@ -12,6 +12,9 @@ public enum InfrastructureType {
     /** The cooling tower. */
     ANTSPACE_COOLING_TOWER("bitmain-liquid-cooling-tower"),
 
+    /** A generic SNMP device. */
+    GENERIC_SNMP("generic-snmp"),
+
     /** A managed switch. */
     MANAGED_SWITCH("managed-switch");
 
