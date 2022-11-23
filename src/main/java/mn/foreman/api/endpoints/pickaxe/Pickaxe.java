@@ -177,7 +177,7 @@ public interface Pickaxe {
 
         /** The info. */
         @JsonProperty("info")
-        public Map<String, String> info;
+        public Map<String, Object> info;
 
         /** The type. */
         @JsonProperty("type")
