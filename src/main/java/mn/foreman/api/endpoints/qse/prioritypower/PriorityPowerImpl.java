@@ -48,7 +48,8 @@ public class PriorityPowerImpl
     public Optional<CurrentLoad> updateRtacStats(
             final boolean is4Cp,
             final double basePoint,
-            final double targetSetPoint) {
+            final double targetSetPoint,
+            final double consumptionWatts) {
         Optional<CurrentLoad> currentLoad = Optional.empty();
         try {
             final Optional<String> response =
@@ -63,7 +64,9 @@ public class PriorityPowerImpl
                                             "basePoint",
                                             basePoint,
                                             "targetSetPoint",
-                                            targetSetPoint)));
+                                            targetSetPoint,
+                                            "consumptionWatts",
+                                            consumptionWatts)));
             if (response.isPresent()) {
                 currentLoad =
                         JsonUtils.fromJson(

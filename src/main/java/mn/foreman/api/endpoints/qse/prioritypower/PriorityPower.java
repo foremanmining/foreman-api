@@ -14,16 +14,18 @@ public interface PriorityPower {
     /**
      * Updates the RTAC state in Foreman.
      *
-     * @param is4Cp          Whether a 4CP event.
-     * @param basePoint      The base point.
-     * @param targetSetPoint The target set point.
+     * @param is4Cp            Whether a 4CP event.
+     * @param basePoint        The base point.
+     * @param targetSetPoint   The target set point.
+     * @param consumptionWatts The consumption (W).
      *
      * @return The current load.
      */
     Optional<CurrentLoad> updateRtacStats(
             boolean is4Cp,
             double basePoint,
-            double targetSetPoint);
+            double targetSetPoint,
+            double consumptionWatts);
 
     /** The load to configure into the RTAC. */
     @JsonIgnoreProperties(ignoreUnknown = true)
