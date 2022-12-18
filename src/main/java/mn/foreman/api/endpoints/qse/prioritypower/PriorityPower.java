@@ -18,6 +18,7 @@ public interface PriorityPower {
      * @param basePoint        The base point.
      * @param targetSetPoint   The target set point.
      * @param consumptionWatts The consumption (W).
+     * @param frequency        The frequency.
      *
      * @return The current load.
      */
@@ -25,7 +26,8 @@ public interface PriorityPower {
             boolean is4Cp,
             double basePoint,
             double targetSetPoint,
-            double consumptionWatts);
+            double consumptionWatts,
+            double frequency);
 
     /** The load to configure into the RTAC. */
     @JsonIgnoreProperties(ignoreUnknown = true)

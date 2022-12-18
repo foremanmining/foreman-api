@@ -49,7 +49,8 @@ public class PriorityPowerImpl
             final boolean is4Cp,
             final double basePoint,
             final double targetSetPoint,
-            final double consumptionWatts) {
+            final double consumptionWatts,
+            final double frequency) {
         Optional<CurrentLoad> currentLoad = Optional.empty();
         try {
             final Optional<String> response =
@@ -66,7 +67,9 @@ public class PriorityPowerImpl
                                             "targetSetPoint",
                                             targetSetPoint,
                                             "consumptionWatts",
-                                            consumptionWatts)));
+                                            consumptionWatts,
+                                            "frequency",
+                                            frequency)));
             if (response.isPresent()) {
                 currentLoad =
                         JsonUtils.fromJson(
