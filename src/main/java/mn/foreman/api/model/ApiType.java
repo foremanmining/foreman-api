@@ -205,7 +205,10 @@ public enum ApiType {
     ALADDIN(65),
 
     /** koi. */
-    KOI(66);
+    KOI(66),
+
+    /** hammer. */
+    HAMMER(67);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
