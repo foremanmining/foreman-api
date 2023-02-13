@@ -15,6 +15,9 @@ public enum InfrastructureType {
     /** A generic SNMP device. */
     GENERIC_SNMP("generic-snmp"),
 
+    /** A fortinet switch. */
+    FORTINET_SWITCH("fortinet-switch"),
+
     /** A managed switch. */
     MANAGED_SWITCH("managed-switch");
 
