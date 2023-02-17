@@ -18,6 +18,12 @@ public enum InfrastructureType {
     /** A fortinet switch. */
     FORTINET_SWITCH("fortinet-switch"),
 
+    /** A Moonshot PDU. */
+    MOONSHOT_PDU("moonshot-pdu"),
+
+    /** An OID PDU. */
+    OIT_PDU("oit-pdu"),
+
     /** A managed switch. */
     MANAGED_SWITCH("managed-switch");
 
