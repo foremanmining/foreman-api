@@ -16,6 +16,14 @@ public class Commands {
     public List<CommandStart> commands;
 
     /** How long to wait before polling for commands again. */
+    @JsonProperty("delay")
+    public int delay;
+
+    /** How long to wait before polling for commands again. */
     @JsonProperty("delaySeconds")
     public int delaySeconds;
+
+    /** How long to wait before polling for commands again (units). */
+    @JsonProperty("delayUnits")
+    public String delayUnits;
 }
