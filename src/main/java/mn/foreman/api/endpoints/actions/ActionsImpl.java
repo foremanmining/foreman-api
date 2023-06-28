@@ -39,7 +39,7 @@ public class ActionsImpl
      * @param webUtil      The web utilities.
      */
     public ActionsImpl(
-            final ObjectMapper objectMapper,d
+            final ObjectMapper objectMapper,
             final WebUtil webUtil) {
         this.objectMapper = objectMapper;
         this.webUtil = webUtil;
