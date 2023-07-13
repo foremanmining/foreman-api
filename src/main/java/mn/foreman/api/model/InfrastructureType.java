@@ -24,6 +24,9 @@ public enum InfrastructureType {
     /** An OID PDU. */
     OIT_PDU("oit-pdu"),
 
+    /** A trilogy PDU. */
+    TRILOGY_PDU("trilogy-pdu"),
+
     /** A managed switch. */
     MANAGED_SWITCH("managed-switch");
 
