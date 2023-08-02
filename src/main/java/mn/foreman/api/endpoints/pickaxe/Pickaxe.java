@@ -182,6 +182,10 @@ public interface Pickaxe {
         /** The type. */
         @JsonProperty("type")
         public InfrastructureType type;
+
+        /** Use Fast collection interval. */
+        @JsonProperty("isFast")
+        public boolean isFast;
     }
 
     /** The stats for a device. */
