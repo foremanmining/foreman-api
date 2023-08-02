@@ -184,7 +184,7 @@ public interface Pickaxe {
         public InfrastructureType type;
 
         /** Use Fast collection interval. */
-        @JsonProperty("is_fast")
+        @JsonProperty("isFast")
         public boolean isFast;
     }
 
