@@ -28,7 +28,13 @@ public enum InfrastructureType {
     TRILOGY_PDU("trilogy-pdu"),
 
     /** A managed switch. */
-    MANAGED_SWITCH("managed-switch");
+    MANAGED_SWITCH("managed-switch"),
+
+    /** A nuenergen. */
+    NU_ENERGEN("nuenergen"),
+
+    /** A nuenergen. */
+    GRID_BEYOND("grid-beyond");
 
     /** A mapping of {@link #type} to {@link InfrastructureType}. */
     private static final Map<String, InfrastructureType> MAPPINGS;
