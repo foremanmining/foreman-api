@@ -208,7 +208,10 @@ public enum ApiType {
     KOI(66),
 
     /** hammer. */
-    HAMMER(67);
+    HAMMER(67),
+
+    /** BlockMiner. */
+    BLOCKMINER(68);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
