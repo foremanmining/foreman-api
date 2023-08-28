@@ -3,9 +3,9 @@ name: primary
 on:
   push:
     branches:
-      - *
+      - '*'
     tags:
-      - *
+      - '*'
 
 jobs:
   build:
