@@ -69,7 +69,7 @@
         <maven-deploy.version>2.7</maven-deploy.version>
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
-        <maven-gpg-plugin.verison>1.5</maven-gpg-plugin.verison>
+        <maven-gpg-plugin.verison>1.6</maven-gpg-plugin.verison>
     </properties>
 
     <dependencies>
