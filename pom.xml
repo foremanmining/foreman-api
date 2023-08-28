@@ -47,7 +47,8 @@
 
     <scm>
         <connection>scm:git:git://github.com/foremanmining/foreman-api.git</connection>
-        <developerConnection>scm:git:ssh://github.com/foremanmining/foreman-api.git</developerConnection><url>https://github.com/foremanmining/foreman-api/tree/master</url>
+        <developerConnection>scm:git:ssh://github.com/foremanmining/foreman-api.git</developerConnection>
+        <url>https://github.com/foremanmining/foreman-api/tree/master</url>
     </scm>
 
     <properties>
