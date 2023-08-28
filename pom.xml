@@ -7,25 +7,48 @@
     <groupId>mn.foreman</groupId>
     <artifactId>java-api</artifactId>
     <packaging>jar</packaging>
-    <version>1.60.0-SNAPSHOT</version>
+    <version>1.60.0</version>
 
     <name>foreman: java-api</name>
+    <description>A library for interacting with the Foreman API.</description>
+    <url>https://github.com/foremanmining/foreman-api</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
     <organization>
         <name>OBM, LLC</name>
         <url>https://foreman.mn</url>
     </organization>
 
+    <developers>
+        <developer>
+            <name>Foreman Development Team</name>
+            <email>developers@obm.mn</email>
+            <organization>OBM, Inc.</organization>
+            <organizationUrl>https://obm.mn/</organizationUrl>
+        </developer>
+    </developers>
+
     <distributionManagement>
         <repository>
-            <id>gcp-releases</id>
-            <url>artifactregistry://us-maven.pkg.dev/foreman-production/releases</url>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
         <snapshotRepository>
-            <id>gcp-snapshots</id>
-            <url>artifactregistry://us-maven.pkg.dev/foreman-production/snapshots</url>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+
+    <scm>
+        <connection>scm:git:git://github.com/foremanmining/foreman-api.git</connection>
+        <developerConnection>scm:git:ssh://github.com/foremanmining/foreman-api.git</developerConnection><url>https://github.com/foremanmining/foreman-api/tree/master</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,8 +65,11 @@
         <slf.version>1.7.25</slf.version>
 
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <maven-deploy.version>2.7</maven-deploy.version>
+        <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+        <maven-gpg-plugin.verison>1.5</maven-gpg-plugin.verison>
     </properties>
-
 
     <dependencies>
         <dependency>
@@ -101,13 +127,62 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven-gpg-plugin.verison}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy.version}</version>
+                <executions>
+                    <execution>
+                        <id>deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <extensions>

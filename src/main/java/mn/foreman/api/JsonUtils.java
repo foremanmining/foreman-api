@@ -16,7 +16,7 @@ public class JsonUtils {
             LoggerFactory.getLogger(JsonUtils.class);
 
     /**
-     * Converts the provided json to the {@link T}.
+     * Converts the provided json to the desired type.
      *
      * @param json          The json.
      * @param objectMapper  The mapper.
