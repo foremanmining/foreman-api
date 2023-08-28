@@ -10,13 +10,13 @@ jobs:
           java-version: 8
           distribution: temurin
       - uses: s4u/maven-settings-action@v2.8.0
-          with:
-            servers: |
-              [{
-                  "id": "ossrh",
-                  "username": "${{ secrets.OSSRH_USERNAME }}",
-                  "password": "${{ secrets.OSSRH_PASSWORD }}"
-              }]
+        with:
+          servers: |
+            [{
+                "id": "ossrh",
+                "username": "${{ secrets.OSSRH_USERNAME }}",
+                "password": "${{ secrets.OSSRH_PASSWORD }}"
+            }]
       - run: |
           echo -n "$GPG_SIGNING_KEY" | base64 --decode | gpg --import
         env:
@@ -32,13 +32,13 @@ jobs:
           java-version: 8
           distribution: temurin
       - uses: s4u/maven-settings-action@v2.8.0
-          with:
-            servers: |
-              [{
-                  "id": "ossrh",
-                  "username": "${{ secrets.OSSRH_USERNAME }}",
-                  "password": "${{ secrets.OSSRH_PASSWORD }}"
-              }]
+        with:
+          servers: |
+            [{
+                "id": "ossrh",
+                "username": "${{ secrets.OSSRH_USERNAME }}",
+                "password": "${{ secrets.OSSRH_PASSWORD }}"
+            }]
       - run: |
           echo -n "$GPG_SIGNING_KEY" | base64 --decode | gpg --import
         env:
