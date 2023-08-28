@@ -58,9 +58,9 @@
         <artifact-registry.version>2.1.0</artifact-registry.version>
         <commons-io.version>2.6</commons-io.version>
         <commons-lang.version>3.7</commons-lang.version>
-        <guava.version>24.1.1-jre</guava.version>
-        <jackson.version>2.9.10</jackson.version>
-        <jackson-databind.version>2.9.10.5</jackson-databind.version>
+        <guava.version>32.0.1-jre</guava.version>
+        <jackson.version>2.12.7</jackson.version>
+        <jackson-databind.version>2.12.7.1</jackson-databind.version>
         <lombok.version>1.18.12</lombok.version>
         <slf.version>1.7.25</slf.version>
 
