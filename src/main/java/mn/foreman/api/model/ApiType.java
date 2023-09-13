@@ -211,7 +211,13 @@ public enum ApiType {
     HAMMER(67),
 
     /** BlockMiner. */
-    BLOCKMINER(68);
+    BLOCKMINER(68),
+
+    /** bitfury. */
+    BITFURY(69),
+    
+    /** Auradine. */
+    AURADINE(70);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
