@@ -212,6 +212,9 @@ public enum ApiType {
 
     /** BlockMiner. */
     BLOCKMINER(68),
+
+    /** bitfury. */
+    BITFURY(69),
     
     /** Auradine. */
     AURADINE(70);
