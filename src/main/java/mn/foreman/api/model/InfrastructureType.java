@@ -30,6 +30,9 @@ public enum InfrastructureType {
     /** A managed switch. */
     MANAGED_SWITCH("managed-switch"),
 
+    /** A CPower PLC. */
+    CPOWER("cpower"),
+
     /** A nuenergen. */
     NU_ENERGEN("nuenergen"),
 
