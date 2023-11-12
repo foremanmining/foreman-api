@@ -215,9 +215,12 @@ public enum ApiType {
 
     /** bitfury. */
     BITFURY(69),
-    
+
     /** Auradine. */
-    AURADINE(70);
+    AURADINE(70),
+
+    /** Iceriver. */
+    ICERIVER(71);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
