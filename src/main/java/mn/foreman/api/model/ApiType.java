@@ -221,9 +221,12 @@ public enum ApiType {
 
     /** Iceriver. */
     ICERIVER(71),
-    
+
     /** iPollo. */
-    IPOLLO(72);
+    IPOLLO(72),
+
+    /** Desiweminer. */
+    DESIWEMINER(73);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
