@@ -220,7 +220,10 @@ public enum ApiType {
     AURADINE(70),
 
     /** Iceriver. */
-    ICERIVER(71);
+    ICERIVER(71),
+    
+    /** iPollo. */
+    IPOLLO(72);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
