@@ -226,7 +226,10 @@ public enum ApiType {
     IPOLLO(72),
 
     /** Desiweminer. */
-    DESIWEMINER(73);
+    DESIWEMINER(73),
+
+    /** Windriver. */
+    WINDRIVER(74);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
