@@ -229,9 +229,9 @@ public interface Pickaxe {
         @JsonProperty("chisel")
         public ChiselConfig chisel;
 
-        /** Whether to ignore consumption. */
-        @JsonProperty("ignoreConsumption")
-        public Boolean ignoreConsumption;
+        /** The ignored attributes. */
+        @JsonProperty("ignoredAttributes")
+        public List<String> ignoredAttributes;
 
         /** The parameters. */
         @JsonProperty("params")
