@@ -179,13 +179,13 @@ public interface Pickaxe {
         @JsonProperty("info")
         public Map<String, Object> info;
 
-        /** The type. */
-        @JsonProperty("type")
-        public InfrastructureType type;
-
         /** Use Fast collection interval. */
         @JsonProperty("isFast")
         public boolean isFast;
+
+        /** The type. */
+        @JsonProperty("type")
+        public InfrastructureType type;
     }
 
     /** The stats for a device. */
@@ -221,9 +221,17 @@ public interface Pickaxe {
         @JsonProperty("apiType")
         public ApiType apiType;
 
+        /** Whether the miner data should be cached and skipped periodically. */
+        @JsonProperty("cacheStats")
+        public Boolean cacheStats;
+
         /** The chisel configuration. */
         @JsonProperty("chisel")
         public ChiselConfig chisel;
+
+        /** Whether to ignore consumption. */
+        @JsonProperty("ignoreConsumption")
+        public Boolean ignoreConsumption;
 
         /** The parameters. */
         @JsonProperty("params")
