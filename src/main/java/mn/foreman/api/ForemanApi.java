@@ -6,6 +6,7 @@ import mn.foreman.api.endpoints.claymore.Claymore;
 import mn.foreman.api.endpoints.csp.Csp;
 import mn.foreman.api.endpoints.groups.Groups;
 import mn.foreman.api.endpoints.miners.Miners;
+import mn.foreman.api.endpoints.minertypes.MinerTypes;
 import mn.foreman.api.endpoints.nicehash.Nicehash;
 import mn.foreman.api.endpoints.notifications.Notifications;
 import mn.foreman.api.endpoints.pickaxe.Pickaxe;
@@ -64,6 +65,13 @@ public interface ForemanApi {
      * @return The API handler.
      */
     Miners miners();
+
+    /**
+     * Creates a new {@link MinerTypes}s that can be leveraged to operate on
+     * the <code>/api/v2/pickaxe/miner-types</code> Foreman API endpoint.
+     * @return The API handler
+     */
+    MinerTypes minerTypes();
 
     /**
      * Creates a {@link Nicehash} handler.
