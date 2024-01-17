@@ -12,6 +12,8 @@ import mn.foreman.api.endpoints.groups.Groups;
 import mn.foreman.api.endpoints.groups.GroupsImpl;
 import mn.foreman.api.endpoints.miners.Miners;
 import mn.foreman.api.endpoints.miners.MinersImpl;
+import mn.foreman.api.endpoints.minertypes.MinerTypes;
+import mn.foreman.api.endpoints.minertypes.MinerTypesImpl;
 import mn.foreman.api.endpoints.nicehash.Nicehash;
 import mn.foreman.api.endpoints.nicehash.NicehashImpl;
 import mn.foreman.api.endpoints.notifications.Notifications;
@@ -108,6 +110,11 @@ public class ForemanApiImpl
                 this.pickaxeId,
                 this.objectMapper,
                 this.webUtil);
+    }
+
+    @Override
+    public MinerTypes minerTypes() {
+        return new MinerTypesImpl(objectMapper, webUtil);
     }
 
     @Override
