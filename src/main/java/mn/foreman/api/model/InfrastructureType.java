@@ -33,11 +33,8 @@ public enum InfrastructureType {
     /** A CPower PLC. */
     CPOWER("cpower"),
 
-    /** A modbus relay. */
-    MODBUS_RELAY("modbus-relay"),
-
-    /** A VFD controller. */
-    VFD_CONTROLLER("vfd-controller"),
+    /** A generic modbus device. */
+    GENERIC_MODBUS("generic-modbus"),
 
     /** A nuenergen. */
     NU_ENERGEN("nuenergen"),
