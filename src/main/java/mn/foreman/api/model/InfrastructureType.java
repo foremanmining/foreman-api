@@ -39,6 +39,12 @@ public enum InfrastructureType {
     /** A nuenergen. */
     NU_ENERGEN("nuenergen"),
 
+    /** OIT RPDU. */
+    OIT_RPDU("oit-rpdu-pdu"),
+
+    /** PowerNet PDU. */
+    POWERNET_PDU("powernet-pdu"),
+
     /** A nuenergen. */
     GRID_BEYOND("grid-beyond");
 
