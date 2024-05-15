@@ -46,7 +46,10 @@ public enum InfrastructureType {
     POWERNET_PDU("powernet-pdu"),
 
     /** A nuenergen. */
-    GRID_BEYOND("grid-beyond");
+    GRID_BEYOND("grid-beyond"),
+
+    /** Nvidia GPU. */
+    NVIDIA("nvidia");
 
     /** A mapping of {@link #type} to {@link InfrastructureType}. */
     private static final Map<String, InfrastructureType> MAPPINGS;
