@@ -229,7 +229,10 @@ public enum ApiType {
     DESIWEMINER(73),
 
     /** Windriver. */
-    WINDRIVER(74);
+    WINDRIVER(74),
+
+    /** Elphapex. */
+    ELPHAPEX(75);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
