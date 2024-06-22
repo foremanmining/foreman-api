@@ -51,7 +51,7 @@ public enum InfrastructureType {
     /** Nvidia GPU. */
     NVIDIA("nvidia"),
 
-    /** OG&E RTAC. */
+    /** OG&amp;E RTAC. */
     OGE_RTAC("oge-rtac");
 
     /** A mapping of {@link #type} to {@link InfrastructureType}. */
