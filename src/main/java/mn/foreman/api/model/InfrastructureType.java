@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/** All of the known infrastructure types. */
+/** All the known infrastructure types. */
 public enum InfrastructureType {
 
     /** The cooling tower. */
@@ -49,7 +49,10 @@ public enum InfrastructureType {
     GRID_BEYOND("grid-beyond"),
 
     /** Nvidia GPU. */
-    NVIDIA("nvidia");
+    NVIDIA("nvidia"),
+
+    /** OG&E RTAC. */
+    OGE_RTAC("oge-rtac");
 
     /** A mapping of {@link #type} to {@link InfrastructureType}. */
     private static final Map<String, InfrastructureType> MAPPINGS;
