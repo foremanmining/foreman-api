@@ -52,7 +52,10 @@ public enum InfrastructureType {
     NVIDIA("nvidia"),
 
     /** OG&amp;E RTAC. */
-    OGE_RTAC("oge-rtac");
+    OGE_RTAC("oge-rtac"),
+
+    /** Digital Shovel PDU. */
+    DIGITAL_SHOVEL_PDU("digital-shovel-pdu");
 
     /** A mapping of {@link #type} to {@link InfrastructureType}. */
     private static final Map<String, InfrastructureType> MAPPINGS;
