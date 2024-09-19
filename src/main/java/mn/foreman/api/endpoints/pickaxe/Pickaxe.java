@@ -450,6 +450,9 @@ public interface Pickaxe {
         /** The write socket timeout (units). */
         @JsonProperty("writeSocketTimeoutUnits")
         public String writeSocketTimeoutUnits;
+
+        @JsonProperty("featureFlags")
+        public Map<String, String> featureFlags;
     }
 
     /** A pickaxe instance. */
