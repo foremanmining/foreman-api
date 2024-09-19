@@ -37,8 +37,11 @@ public interface MinerTypes {
         /** Additional attributes */
         private final Map<String, String> additionalAttributes;
 
-        /** Sub types **/
+        /** Sub types */
         private final List<MinerType> subTypes;
+
+        /** Identifier. */
+        private final String identifier;
 
         /**
          * Constructor
@@ -55,13 +58,15 @@ public interface MinerTypes {
                          @JsonProperty("category") String category,
                          @JsonProperty("hashRates") List<String> hashRates,
                          @JsonProperty("additionalAttributes") Map<String, String> additionalAttributes,
-                         @JsonProperty("subTypes") List<MinerType> subTypes) {
+                         @JsonProperty("subTypes") List<MinerType> subTypes,
+                         @JsonProperty("identifier") String identifier) {
             this.manufacturer = manufacturer;
             this.slug = slug;
             this.category = category;
             this.hashRates = hashRates;
             this.additionalAttributes = additionalAttributes;
             this.subTypes = subTypes;
+            this.identifier = identifier;
         }
     }
 }
