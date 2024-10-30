@@ -35,7 +35,7 @@ public class JsonUtils {
                             json,
                             typeReference));
         } catch (final IOException e) {
-            LOG.warn("Exception occurred while parsing response", e);
+            LOG.error("Exception occurred while parsing response : {}", json, e);
         }
         return Optional.empty();
     }

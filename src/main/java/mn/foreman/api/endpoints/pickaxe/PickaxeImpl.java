@@ -74,7 +74,7 @@ public class PickaxeImpl
     }
 
     @Override
-    public Optional<List<Integer>> cancelCommands() {
+    public Optional<List<String>> cancelCommands() {
         return this.webUtil.post(
                 String.format(
                         "/api/pickaxe/%s/commands/cancel",
@@ -320,7 +320,7 @@ public class PickaxeImpl
                                 });
             }
         } catch (final Exception e) {
-            LOG.warn("Exception occurred while parsing json", e);
+            LOG.error("Exception occurred while parsing json", e);
         }
         return result;
     }

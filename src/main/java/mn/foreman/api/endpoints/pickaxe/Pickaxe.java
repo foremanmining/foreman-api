@@ -32,7 +32,7 @@ public interface Pickaxe {
      *
      * @return The cancelled command IDs.
      */
-    Optional<List<Integer>> cancelCommands();
+    Optional<List<String>> cancelCommands();
 
     /**
      * Sends a command completion to the Foreman API.
@@ -164,7 +164,7 @@ public interface Pickaxe {
 
         /** The cancelled IDs. */
         @JsonProperty("cancelledIds")
-        public List<Integer> cancelledIds;
+        public List<String> cancelledIds;
     }
 
     /** An infrastructure configuration. */
