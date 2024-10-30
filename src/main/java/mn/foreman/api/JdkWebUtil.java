@@ -136,8 +136,6 @@ public class JdkWebUtil
             final String uri,
             final boolean auth,
             final Map<String, String> params) {
-        String response = null;
-
         final RequestConfig requestConfig =
                 RequestConfig.custom()
                         .setConnectTimeout(this.socketTimeoutMillis)
@@ -165,7 +163,7 @@ public class JdkWebUtil
             }
             httpGet.setURI(uriBuilder.build());
 
-            LOG.debug("Querying {}{}",
+            LOG.info("Querying {}{}",
                     this.foremanUrl,
                     uri);
 
@@ -177,25 +175,22 @@ public class JdkWebUtil
 
             try (final CloseableHttpResponse httpResponse =
                          httpClient.execute(httpGet)) {
-                final int statusCode =
-                        httpResponse
-                                .getStatusLine()
-                                .getStatusCode();
-                if (statusCode == HttpStatus.SC_OK) {
-                    response =
-                            EntityUtils.toString(
-                                    httpResponse.getEntity(),
-                                    StandardCharsets.UTF_8);
-                    LOG.debug("Obtained response from Foreman: {}", response);
-                }
+                return getResponse(uri, httpResponse, true);
             } catch (final IOException ioe) {
-                LOG.warn("Exception occurred while GETing", ioe);
+                LOG.error(
+                        "Error completing GET request for uri {} : {}",
+                        uri, ioe.getMessage());
             }
-        } catch (final IOException | URISyntaxException ioe) {
-            LOG.warn("Exception occurred while GETing", ioe);
+        } catch (final IOException ioe) {
+            LOG.error(
+                    "Error creating HTTP client for GET {} : {}",
+                    uri, ioe.getMessage());
+        } catch (final URISyntaxException syntaxException) {
+            LOG.error(
+                    "Error creating URI for GET {} : {}",
+                    uri, syntaxException.getMessage());
         }
-
-        return Optional.ofNullable(response);
+        return Optional.empty();
     }
 
     /**
@@ -211,7 +206,6 @@ public class JdkWebUtil
             final String uri,
             final String body,
             final HttpEntityEnclosingRequestBase requestBase) {
-        String response = null;
 
         final RequestConfig requestConfig =
                 RequestConfig.custom()
@@ -229,7 +223,7 @@ public class JdkWebUtil
             final StringEntity stringEntity =
                     new StringEntity(body);
 
-            LOG.debug("Querying {}{} with {}",
+            LOG.info("Querying {}{} with {}",
                     this.foremanUrl,
                     uri,
                     body);
@@ -244,24 +238,56 @@ public class JdkWebUtil
 
             try (final CloseableHttpResponse httpResponse =
                          httpClient.execute(requestBase)) {
-                final int statusCode =
-                        httpResponse
-                                .getStatusLine()
-                                .getStatusCode();
-                if (statusCode == HttpStatus.SC_OK) {
-                    response =
-                            EntityUtils.toString(
-                                    httpResponse.getEntity(),
-                                    StandardCharsets.UTF_8);
-                    LOG.debug("Obtained response from Foreman: {}", response);
-                }
+                return getResponse(uri, httpResponse, false);
             } catch (final IOException ioe) {
-                LOG.warn("Exception occurred while posting", ioe);
+                LOG.error(
+                        "Error completing POST request for uri {} : {}",
+                        uri, ioe.getMessage());
             }
         } catch (final IOException ioe) {
-            LOG.warn("Exception occurred while posting", ioe);
+            LOG.error(
+                    "Error creating HTTP client for POST {} : {}",
+                    uri, ioe.getMessage());
         }
-
-        return Optional.ofNullable(response);
+        return Optional.empty();
     }
+
+    /**
+     * Process response.
+     *
+     * @param uri          The uri.
+     * @param httpResponse The http response.
+     * @param isGet        If it was a GET.
+     *
+     * @return The string response.
+     */
+    private static Optional<String> getResponse(
+            final String uri,
+            final CloseableHttpResponse httpResponse,
+            final boolean isGet) {
+        final String method = isGet ? "GET" : "POST";
+        final int statusCode =
+                httpResponse
+                        .getStatusLine()
+                        .getStatusCode();
+        try {
+            final String response =
+                    EntityUtils.toString(
+                            httpResponse.getEntity(),
+                            StandardCharsets.UTF_8);
+            if (statusCode == HttpStatus.SC_OK) {
+                LOG.info("Obtained {} response from Foreman: {}", method, response);
+                return Optional.ofNullable(response);
+            }
+            LOG.error(
+                    "Received non 200 for {} status of {} for uri {} : {}",
+                    method, statusCode, uri, response);
+        } catch (final IOException e) {
+            LOG.error(
+                    "Error parsing {} response for uri {} with status code {} : {}",
+                    method, uri, statusCode, e.getMessage());
+        }
+        return Optional.empty();
+    }
+
 }
