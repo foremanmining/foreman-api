@@ -451,8 +451,13 @@ public interface Pickaxe {
         @JsonProperty("writeSocketTimeoutUnits")
         public String writeSocketTimeoutUnits;
 
+        /** Pickaxe feature flags. */
         @JsonProperty("featureFlags")
         public Map<String, String> featureFlags;
+
+        /** The number of threads to push command updates. */
+        @JsonProperty("commandFinishingThreadsOverride")
+        public Integer commandFinishingThreadsOverride;
     }
 
     /** A pickaxe instance. */
