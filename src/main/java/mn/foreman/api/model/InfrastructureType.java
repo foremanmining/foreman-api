@@ -58,7 +58,10 @@ public enum InfrastructureType {
     DIGITAL_SHOVEL_PDU("digital-shovel-pdu"),
 
     /** Basin RTAC. */
-    BASIN_RTAC("basin-rtac"),;
+    BASIN_RTAC("basin-rtac"),
+
+    /** PME RTAC. */
+    PME_RTAC("pme-rtac");
 
     /** A mapping of {@link #type} to {@link InfrastructureType}. */
     private static final Map<String, InfrastructureType> MAPPINGS;
