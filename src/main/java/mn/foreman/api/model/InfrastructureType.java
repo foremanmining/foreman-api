@@ -61,7 +61,10 @@ public enum InfrastructureType {
     BASIN_RTAC("basin-rtac"),
 
     /** PME RTAC. */
-    PME_RTAC("pme-rtac");
+    PME_RTAC("pme-rtac"),
+
+    /** Shell RTAC. */
+    SHELL_RTAC("shell-rtac");
 
     /** A mapping of {@link #type} to {@link InfrastructureType}. */
     private static final Map<String, InfrastructureType> MAPPINGS;
