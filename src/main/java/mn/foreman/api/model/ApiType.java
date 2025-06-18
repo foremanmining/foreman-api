@@ -232,7 +232,10 @@ public enum ApiType {
     WINDRIVER(74),
 
     /** Elphapex. */
-    ELPHAPEX(75);
+    ELPHAPEX(75),
+
+    /** SealMiner. */
+    SEALMINER(76);
 
     /** A mapping of {@link #type} to {@link ApiType}. */
     private static final Map<Integer, ApiType> MAPPINGS;
